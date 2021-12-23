@@ -18,6 +18,7 @@
             <title>【原创】Android studio原生模拟器(Emulator)刷入Magisk获取root</title>
             <link>https://blog.hongqing.online/android/MagiskOnEmulator/</link>
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
+            <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;最近在研究安卓方面的逆向&lt;br /&gt;
@@ -143,6 +144,7 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <link>https://blog.hongqing.online/android/androidsecurity/AndroidArmInlineHook/</link>
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
+            <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
