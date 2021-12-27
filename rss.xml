@@ -24,17 +24,18 @@
             <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <pubDate>Tue, 28 Dec 2021 01:43:00 +0800</pubDate>
             <description><![CDATA[ &lt;div class=&#34;note info&#34;&gt;
-&lt;p&gt;本文所指的 Unity 安全攻防 暂时只包括移动端 (尤指 Android) 暂不包括 PC 端攻防逆向&lt;/p&gt;
+&lt;p&gt;本文所指的 Unity 安全攻防 暂时只包括移动端 (尤指 Android) 不包括 PC 端攻防逆向&lt;/p&gt;
 &lt;/div&gt;
 &lt;blockquote&gt;
-&lt;p&gt;面向 Unity 开发的游戏做逆向安全 &amp;lt;br&amp;gt;&lt;br /&gt;
- 难免需要对游戏的 native 层 做一下 dump &amp;lt;br&amp;gt;&lt;br /&gt;
- 老版本的 Unity 游戏开发 都是典型的依托于 mono 编译 &amp;lt;br&amp;gt;&lt;br /&gt;
- 后受到版权 / 效率 / 维护等各方面因素影响 &amp;lt;br&amp;gt;&lt;br /&gt;
-Unity 统一采用 IL2CPP 体系 将中间语言 IL 转化为 cpp 执行 &amp;lt;br&amp;gt;&lt;br /&gt;
- 因此 对目前的 Unity 系 进程 dump 时 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3huLS1saTJjcHAtMnk3aWc5NG5tcWQ4NzJjb3k1Yi5zbw==&#34;&gt;主要目标是 li2cpp.so&lt;/span&gt; &amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;p&gt;面向 Unity 开发的游戏做逆向安全&lt;br /&gt;
+难免需要对游戏的 native 层 做一下 dump&lt;br /&gt;
+ 老版本的 Unity 游戏开发 都是典型的依托于 mono 编译&lt;br /&gt;
+后受到版权 / 效率 / 维护等各方面因素影响&lt;br /&gt;
+ Unity 统一采用 IL2CPP 体系 将中间语言 IL 转化为 cpp 执行&lt;br /&gt;
+因此 对目前的 Unity 系 进程 dump 时 主要目标是 li2cpp 的 so 文件&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;项目介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#项目介绍&#34;&gt;#&lt;/a&gt; 项目介绍&lt;/h1&gt;
+&lt;h1 id=&#34;基础知识&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础知识&#34;&gt;#&lt;/a&gt; 基础知识&lt;/h1&gt;
 &lt;h1 id=&#34;il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#il2cppdumper&#34;&gt;#&lt;/a&gt; il2cppdumper&lt;/h1&gt;
 &lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; riru-il2cppdumper&lt;/h1&gt;
 &lt;h1 id=&#34;浅谈攻防安全&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浅谈攻防安全&#34;&gt;#&lt;/a&gt; 浅谈攻防安全&lt;/h1&gt;
