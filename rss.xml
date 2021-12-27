@@ -10,9 +10,36 @@
         </author>
         <description>静坐常思己过 闲谈莫论人非</description>
         <language>zh-CN</language>
-        <pubDate>Fri, 24 Dec 2021 15:46:25 +0800</pubDate>
-        <lastBuildDate>Fri, 24 Dec 2021 15:46:25 +0800</lastBuildDate>
+        <pubDate>Tue, 28 Dec 2021 01:43:00 +0800</pubDate>
+        <lastBuildDate>Tue, 28 Dec 2021 01:43:00 +0800</lastBuildDate>
         <category term="SsageParuders" />
+        <item>
+            <guid isPermalink="true">https://blog.hongqing.online/android/androidsecurity/il2cppdumper/</guid>
+            <title>il2cppdumper使用教程</title>
+            <link>https://blog.hongqing.online/android/androidsecurity/il2cppdumper/</link>
+            <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
+            <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
+            <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
+            <category term="教程向" scheme="https://blog.hongqing.online/tags/%E6%95%99%E7%A8%8B%E5%90%91/" />
+            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
+            <pubDate>Tue, 28 Dec 2021 01:43:00 +0800</pubDate>
+            <description><![CDATA[ &lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;本文所指的 Unity 安全攻防 暂时只包括移动端 (尤指 Android) 暂不包括 PC 端攻防逆向&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;面向 Unity 开发的游戏做逆向安全 &amp;lt;br&amp;gt;&lt;br /&gt;
+ 难免需要对游戏的 native 层 做一下 dump &amp;lt;br&amp;gt;&lt;br /&gt;
+ 老版本的 Unity 游戏开发 都是典型的依托于 mono 编译 &amp;lt;br&amp;gt;&lt;br /&gt;
+ 后受到版权 / 效率 / 维护等各方面因素影响 &amp;lt;br&amp;gt;&lt;br /&gt;
+Unity 统一采用 IL2CPP 体系 将中间语言 IL 转化为 cpp 执行 &amp;lt;br&amp;gt;&lt;br /&gt;
+ 因此 对目前的 Unity 系 进程 dump 时 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3huLS1saTJjcHAtMnk3aWc5NG5tcWQ4NzJjb3k1Yi5zbw==&#34;&gt;主要目标是 li2cpp.so&lt;/span&gt; &amp;lt;br&amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;项目介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#项目介绍&#34;&gt;#&lt;/a&gt; 项目介绍&lt;/h1&gt;
+&lt;h1 id=&#34;il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#il2cppdumper&#34;&gt;#&lt;/a&gt; il2cppdumper&lt;/h1&gt;
+&lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; riru-il2cppdumper&lt;/h1&gt;
+&lt;h1 id=&#34;浅谈攻防安全&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浅谈攻防安全&#34;&gt;#&lt;/a&gt; 浅谈攻防安全&lt;/h1&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://blog.hongqing.online/skills/GitStudy/</guid>
             <title>Git学习笔记</title>
@@ -99,7 +126,7 @@
 但是虚拟设备 (Emulator) 刷入 root 环境显然更加便于研究&lt;br /&gt;
 于是开始折腾 Android studio 原生的模拟器如何刷入 root 环境&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1 id=&#34;创建不具有google-api的设备&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#创建不具有google-api的设备&#34;&gt;#&lt;/a&gt; 创建不具有 Google api 的设备&lt;/h1&gt;
+&lt;h1 id=&#34;创建不具有google-play的设备&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#创建不具有google-play的设备&#34;&gt;#&lt;/a&gt; 创建不具有 Google play 的设备&lt;/h1&gt;
 &lt;p&gt;在查阅 Google 官方的 Android 开发者文档以后&lt;br /&gt;
 找到了如下资料&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112240321563.png&#34; alt=&#34;捕获&#34; /&gt;&lt;br /&gt;
@@ -218,6 +245,7 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
+            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
