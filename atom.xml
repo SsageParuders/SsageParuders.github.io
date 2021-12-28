@@ -44,15 +44,16 @@ Riru-Il2CppDumper 博主 fork 后地址:&lt;/p&gt;
 才会用到 Riru-Il2CppDumper 进行 dump&lt;br /&gt;
  因为根据 Perfare 的表述 该项目可以绕过几乎所有保护&lt;br /&gt;
 遗憾的是 Riru-Il2CppDumper 进行的解密暂时还不算十分完善&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;缺陷(此时项目版本@90a8fb3)&lt;/summary&gt;&lt;div&gt;
+&lt;/div&gt;&lt;/details&gt;
 &lt;/blockquote&gt;
-&lt;details&gt;&lt;summary&gt;缺陷()&lt;/summary&gt;&lt;div&gt;
 &lt;p&gt;[X] 娱乐低版本使用反射进行 dump&lt;br /&gt;
  [X] 高版本使用 il2cpp_image_get_class 进行 dump&lt;br /&gt;
  [ ] 完善 dump.cs 输出&lt;br /&gt;
  [ ] 泛型相关输出&lt;br /&gt;
  [ ] 生成 IDA 脚本&lt;br /&gt;
- [ ] 生成头文件&lt;/p&gt;
-&lt;/div&gt;&lt;/details&gt;
+ [ ] 生成头文件&lt;br /&gt;
+ +++&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;不过对于常规的安全攻防是足够使用的了&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -361,8 +362,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
         <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
         <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-        <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
         <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
+        <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
         <updated>2021-12-23T18:42:25.000Z</updated>
     </entry>
 </feed>
