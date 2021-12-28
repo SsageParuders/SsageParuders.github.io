@@ -65,7 +65,7 @@
 &lt;li&gt;
 &lt;p&gt;在游戏的 assets/bin/Date/Managed/Metadata 目录下&lt;br /&gt;
 存在 &lt;code&gt;global-metadata.dat&lt;/code&gt;  文件&lt;br /&gt;
-部分游戏概率对此文件进行加密 这个后面会提到&lt;br /&gt;
+部分游戏可能对此文件进行加密 这个后面会提到&lt;br /&gt;
 只需知道这个目录下的文件就是 &lt;code&gt;global-metadata.dat&lt;/code&gt;  即可&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -75,7 +75,40 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#il2cppdumper&#34;&gt;#&lt;/a&gt; Il2cppdumper&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;首先 到 Perfare 大佬的&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvSWwyQ3BwRHVtcGVy&#34;&gt; Il2cppdumper&lt;/span&gt; 项目地址上&lt;br /&gt;
+下载最新版的 Il2cppdumper 的 release 发行版&lt;br /&gt;
+注：本教程时 该项目处于 @90a8fb3 版本&lt;br /&gt;
+层级目录如下所示:&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112290323588.png&#34; alt=&#34;3&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;普通的未加密项目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#普通的未加密项目&#34;&gt;#&lt;/a&gt; 普通的未加密项目&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在 cmd 中打开到 Il2cppdumper 项目路径&lt;/li&gt;
+&lt;li&gt;创建 RES 目录用来存放 &lt;code&gt;global-metadata.dat&lt;/code&gt;  和 &lt;code&gt;li2cpp.so&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;创建 OUT 目录用来存放 Il2cppdumper 输出内容&lt;/li&gt;
+&lt;li&gt;在 cmd 中输入&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;    Il2CppDumper.exe &amp;lt;li2cpp.so路径&amp;gt; &amp;lt;global-metadata.dat路径&amp;gt; &amp;lt;输出文件路径&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+如图所示:&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112290335132.png&#34; alt=&#34;4&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;按照指令运行以后 可以看到我们的 OUT 目录下&lt;br /&gt;
+已经存在了 dump 后的输出文件&lt;br /&gt;
+在 &lt;code&gt;dump.cs&lt;/code&gt;  中 内部方法名和偏移已经一清二楚&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112290340017.png&#34; alt=&#34;5&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;除了 &lt;code&gt;dump.cs&lt;/code&gt; ，还有一些其他文件 各有其他用处&lt;br /&gt;
+比如 il2cpp.h 中包含了结构体的头文件等等&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3huLS1JbDJjcHBkdW1wZXJSRUFETUUtdmo1MmEzNmQxeXRidm1zM2FiNTgxZGN2eWIubWQ=&#34;&gt;具体可以参考 Il2cppdumper 的 README.md&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;特别说明&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在老版本的 Il2cppdumper 中 需要分模式运行&lt;br /&gt;
+手工模式中 需要手动指定两处指针地址&lt;br /&gt;
+新版的 Il2cppdumper 中 做了一定优化&lt;br /&gt;
+不再需要手工模式 优化为全自动处理&lt;br /&gt;
+但在对 dump 进行一定的&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;稍作加密的项目如何处理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#稍作加密的项目如何处理&#34;&gt;#&lt;/a&gt; 稍作加密的项目如何处理&lt;/h2&gt;
 &lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -305,8 +338,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-            <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
             <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
+            <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
