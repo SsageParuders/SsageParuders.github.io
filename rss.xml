@@ -95,7 +95,7 @@
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112290340017.png&#34; alt=&#34;5&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;除了 &lt;code&gt;dump.cs&lt;/code&gt; ，还有一些其他文件 各有其他用处&lt;br /&gt;
 比如 il2cpp.h 中包含了结构体的头文件等等&lt;br /&gt;
-&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL3huLS1JbDJjcHBkdW1wZXJSRUFETUUtdmo1MmEzNmQxeXRidm1zM2FiNTgxZGN2eWIubWQ=&#34;&gt;具体可以参考 Il2cppdumper 的 README.md&lt;/span&gt;&lt;/li&gt;
+具体可以参考 Il2cppdumper 的 README&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;特别说明&lt;/p&gt;
