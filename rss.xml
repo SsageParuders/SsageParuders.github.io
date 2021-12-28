@@ -14,9 +14,9 @@
         <lastBuildDate>Tue, 28 Dec 2021 01:43:00 +0800</lastBuildDate>
         <category term="SsageParuders" />
         <item>
-            <guid isPermalink="true">https://blog.hongqing.online/android/androidsecurity/ll2cppdumper/</guid>
-            <title>ll2cppdumper使用教程</title>
-            <link>https://blog.hongqing.online/android/androidsecurity/ll2cppdumper/</link>
+            <guid isPermalink="true">https://blog.hongqing.online/android/androidsecurity/Il2cppdumper/</guid>
+            <title>Il2cppdumper使用教程</title>
+            <link>https://blog.hongqing.online/android/androidsecurity/Il2cppdumper/</link>
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
@@ -35,15 +35,39 @@
 因此 对目前的 Unity 系 进程 dump 时 主要目标是 li2cpp 的 so 文件&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;项目介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#项目介绍&#34;&gt;#&lt;/a&gt; 项目介绍&lt;/h1&gt;
-&lt;p&gt;Unity 逆向中最常用的工具应该是 Perfare 大佬的项目&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvSWwyQ3BwRHVtcGVy&#34;&gt; ll2cppdumper&lt;/span&gt;&lt;br /&gt;
+&lt;p&gt;Unity 逆向中最常用的工具应该是 Perfare 大佬的项目&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvSWwyQ3BwRHVtcGVy&#34;&gt; Il2cppdumper&lt;/span&gt;&lt;br /&gt;
  和对应的 Android 版项目&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvUmlydS1JbDJDcHBEdW1wZXI=&#34;&gt; Riru-Il2CppDumper&lt;/span&gt;&lt;br /&gt;
- 本资料偏教程向 主要归类总结 ll2cppdumper 的各种使用方式&lt;br /&gt;
-并浅谈 Unity 项目安全的攻防&lt;/p&gt;
+ 本资料偏教程向 主要归类总结 Il2cppdumper 的各种使用方式&lt;br /&gt;
+并浅谈 Unity 项目安全的攻防&lt;br /&gt;
+ Il2cppdumper 博主 fork 后地址:&lt;br /&gt;
+Riru-Il2CppDumper 博主 fork 后地址:&lt;/p&gt;
 &lt;h1 id=&#34;基础知识&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础知识&#34;&gt;#&lt;/a&gt; 基础知识&lt;/h1&gt;
 &lt;h2 id=&#34;如何查看-unity-项目的引擎版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何查看-unity-项目的引擎版本&#34;&gt;#&lt;/a&gt; 如何查看 Unity 项目的引擎版本&lt;/h2&gt;
 &lt;h2 id=&#34;如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;#&lt;/a&gt; 如何提取 Unity 项目的 global-metadata.dat 和 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2xpMmNwcC5zbw==&#34;&gt;li2cpp.so&lt;/span&gt;&lt;/h2&gt;
-&lt;h1 id=&#34;ll2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ll2cppdumper&#34;&gt;#&lt;/a&gt; ll2cppdumper&lt;/h1&gt;
-&lt;h1 id=&#34;riru-ll2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-ll2cppdumper&#34;&gt;#&lt;/a&gt; riru-ll2cppdumper&lt;/h1&gt;
+&lt;h1 id=&#34;il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#il2cppdumper&#34;&gt;#&lt;/a&gt; Il2cppdumper&lt;/h1&gt;
+&lt;h2 id=&#34;普通的未加密项目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#普通的未加密项目&#34;&gt;#&lt;/a&gt; 普通的未加密项目&lt;/h2&gt;
+&lt;h2 id=&#34;稍作加密的项目如何处理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#稍作加密的项目如何处理&#34;&gt;#&lt;/a&gt; 稍作加密的项目如何处理&lt;/h2&gt;
+&lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一般情况下 只有对资源文件做了严格加密的 Unity 游戏&lt;br /&gt;
+才会用到 Riru-Il2CppDumper 进行 dump&lt;br /&gt;
+ 因为根据 Perfare 的表述 该项目可以绕过几乎所有保护&lt;br /&gt;
+遗憾的是 Riru-Il2CppDumper 进行的解密暂时还不算十分完善&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;details&gt;&lt;summary&gt;缺陷()&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;[X] 娱乐低版本使用反射进行 dump&lt;br /&gt;
+ [X] 高版本使用 il2cpp_image_get_class 进行 dump&lt;br /&gt;
+ [ ] 完善 dump.cs 输出&lt;br /&gt;
+ [ ] 泛型相关输出&lt;br /&gt;
+ [ ] 生成 IDA 脚本&lt;br /&gt;
+ [ ] 生成头文件&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;blockquote&gt;
+&lt;p&gt;不过对于常规的安全攻防是足够使用的了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;下面我来浅谈 Riru-Il2cppdumper 的使用方法&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;浅谈攻防安全&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浅谈攻防安全&#34;&gt;#&lt;/a&gt; 浅谈攻防安全&lt;/h1&gt;
  ]]></description>
         </item>
