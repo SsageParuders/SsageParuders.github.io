@@ -78,9 +78,7 @@
 &lt;li&gt;在 cmd 中打开到 Il2cppdumper 项目路径&lt;/li&gt;
 &lt;li&gt;创建 RES 目录用来存放 &lt;code&gt;global-metadata.dat&lt;/code&gt;  和 &lt;code&gt;li2cpp.so&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;创建 OUT 目录用来存放 Il2cppdumper 输出内容&lt;/li&gt;
-&lt;li&gt;在 cmd 中输入&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;    Il2CppDumper.exe &amp;lt;li2cpp.so路径&amp;gt; &amp;lt;global-metadata.dat路径&amp;gt; &amp;lt;输出文件路径&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-如图所示:&lt;br /&gt;
+&lt;li&gt;在 cmd 中输入&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Il2CppDumper.exe &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;li2cpp.so路径&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;global-metadata.dat路径&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;输出文件路径&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;如图所示:&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112290335132.png&#34; alt=&#34;4&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;按照指令运行以后 可以看到我们的 OUT 目录下&lt;br /&gt;
 已经存在了 dump 后的输出文件&lt;br /&gt;
@@ -424,8 +422,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
         <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
         <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-        <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
         <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
+        <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
         <updated>2021-12-23T18:42:25.000Z</updated>
     </entry>
 </feed>
