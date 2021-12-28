@@ -32,7 +32,7 @@
  老版本的 Unity 游戏开发 都是典型的依托于 mono 编译&lt;br /&gt;
 后受到版权 / 效率 / 维护等各方面因素影响&lt;br /&gt;
  Unity 统一采用 IL2CPP 体系 将中间语言 IL 转化为 cpp 执行&lt;br /&gt;
-因此 对目前的 Unity 系 进程 dump 时 主要目标是 li2cpp 的 so 文件&lt;/p&gt;
+因此 对目前的 Unity 系 进程 dump 时 主要目标是 &lt;code&gt;li2cpp.so&lt;/code&gt;  文件&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;项目介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#项目介绍&#34;&gt;#&lt;/a&gt; 项目介绍&lt;/h1&gt;
 &lt;p&gt;Unity 逆向中最常用的工具应该是 Perfare 大佬的项目&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvSWwyQ3BwRHVtcGVy&#34;&gt; Il2cppdumper&lt;/span&gt;&lt;br /&gt;
@@ -43,7 +43,7 @@
 Riru-Il2CppDumper 博主 fork 后地址:&lt;/p&gt;
 &lt;h1 id=&#34;基础知识&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础知识&#34;&gt;#&lt;/a&gt; 基础知识&lt;/h1&gt;
 &lt;h2 id=&#34;如何查看-unity-项目的引擎版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何查看-unity-项目的引擎版本&#34;&gt;#&lt;/a&gt; 如何查看 Unity 项目的引擎版本&lt;/h2&gt;
-&lt;h2 id=&#34;如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;#&lt;/a&gt; 如何提取 Unity 项目的 global-metadata.dat 和 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2xpMmNwcC5zbw==&#34;&gt;li2cpp.so&lt;/span&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;#&lt;/a&gt; 如何提取 Unity 项目的 global-metadata.dat 和  &lt;code&gt;li2cpp.so&lt;/code&gt;&lt;/h2&gt;
 &lt;h1 id=&#34;il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#il2cppdumper&#34;&gt;#&lt;/a&gt; Il2cppdumper&lt;/h1&gt;
 &lt;h2 id=&#34;普通的未加密项目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#普通的未加密项目&#34;&gt;#&lt;/a&gt; 普通的未加密项目&lt;/h2&gt;
 &lt;h2 id=&#34;稍作加密的项目如何处理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#稍作加密的项目如何处理&#34;&gt;#&lt;/a&gt; 稍作加密的项目如何处理&lt;/h2&gt;
