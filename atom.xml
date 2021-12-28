@@ -26,10 +26,15 @@
 因此 对目前的 Unity 系 进程 dump 时 主要目标是 li2cpp 的 so 文件&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;项目介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#项目介绍&#34;&gt;#&lt;/a&gt; 项目介绍&lt;/h1&gt;
-&lt;p&gt;Unity 逆向中最常用的工具应该是 Perfare 大佬的项目&lt;a href=&#34;&#34;&gt; ll&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Unity 逆向中最常用的工具应该是 Perfare 大佬的项目&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvSWwyQ3BwRHVtcGVy&#34;&gt; ll2cppdumper&lt;/span&gt;&lt;br /&gt;
+ 和对应的 Android 版项目&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BlcmZhcmUvUmlydS1JbDJDcHBEdW1wZXI=&#34;&gt; Riru-Il2CppDumper&lt;/span&gt;&lt;br /&gt;
+ 本资料偏教程向 主要归类总结 ll2cppdumper 的各种使用方式&lt;br /&gt;
+并浅谈 Unity 项目安全的攻防&lt;/p&gt;
 &lt;h1 id=&#34;基础知识&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础知识&#34;&gt;#&lt;/a&gt; 基础知识&lt;/h1&gt;
-&lt;h1 id=&#34;il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#il2cppdumper&#34;&gt;#&lt;/a&gt; il2cppdumper&lt;/h1&gt;
-&lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; riru-il2cppdumper&lt;/h1&gt;
+&lt;h2 id=&#34;如何查看-unity-项目的引擎版本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何查看-unity-项目的引擎版本&#34;&gt;#&lt;/a&gt; 如何查看 Unity 项目的引擎版本&lt;/h2&gt;
+&lt;h2 id=&#34;如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何提取-unity-项目的-global-metadatadat-和-li2cppso&#34;&gt;#&lt;/a&gt; 如何提取 Unity 项目的 global-metadata.dat 和 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL2xpMmNwcC5zbw==&#34;&gt;li2cpp.so&lt;/span&gt;&lt;/h2&gt;
+&lt;h1 id=&#34;ll2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ll2cppdumper&#34;&gt;#&lt;/a&gt; ll2cppdumper&lt;/h1&gt;
+&lt;h1 id=&#34;riru-ll2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-ll2cppdumper&#34;&gt;#&lt;/a&gt; riru-ll2cppdumper&lt;/h1&gt;
 &lt;h1 id=&#34;浅谈攻防安全&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浅谈攻防安全&#34;&gt;#&lt;/a&gt; 浅谈攻防安全&lt;/h1&gt;
 </content>
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
