@@ -182,6 +182,7 @@
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper&lt;/h1&gt;
+&lt;h3 id=&#34;riru-il2cppdumper介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper介绍&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper 介绍&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;一般情况下 只有对资源文件做了严格加密的 Unity 游戏&lt;br /&gt;
 才会用到 Riru-Il2CppDumper 进行 dump&lt;br /&gt;
@@ -202,6 +203,9 @@
 &lt;blockquote&gt;
 &lt;p&gt;下面我来浅谈 Riru-Il2cppdumper 的使用方法&lt;/p&gt;
 &lt;/blockquote&gt;
+&lt;p&gt;例子就拿一款对 &lt;code&gt;global-metadata.dat&lt;/code&gt;  做了较强加密的游戏为例&lt;br /&gt;
+如图所示 这款游戏的 metadata 被加密以后 正常的 il2cppdumper 无法使用&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300030805.png&#34; alt=&#34;14&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;Android 项目相关的依赖环境请自行提前布置&lt;/p&gt;
 &lt;/div&gt;
@@ -213,6 +217,7 @@
  &lt;code&gt;module.gradle&lt;/code&gt;  是模块的一些信息 可以适当修改&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292312685.png&#34; alt=&#34;9&#34; /&gt; 目录中的 &lt;code&gt;game.h&lt;/code&gt;  是重点 接下来着重介绍&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;riru-il2cppdumper步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper步骤&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper 步骤&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;修改 &lt;code&gt;game.h&lt;/code&gt;  中的 GamePackageName 为对应游戏的包名&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292319515.png&#34; alt=&#34;10&#34; /&gt;&lt;/li&gt;
@@ -221,7 +226,7 @@
 将版本区间前的值 覆写到 UnityVersion 上去&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292324508.png&#34; alt=&#34;11&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;最终如下图所示:&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292343087.png&#34; alt=&#34;12&#34; /&gt; 由于需要对游戏做脱敏处理 包名暂时不予显示&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292343087.png&#34; alt=&#34;12&#34; /&gt;&lt;span class=&#34;label danger&#34;&gt; 由于需要对游戏做脱敏处理 包名暂时不予显示&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;点击 &lt;code&gt;小锤子&lt;/code&gt; 进行 build 等待 build 结束&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292346165.png&#34; alt=&#34;&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;build 结束以后 进入 out 目录下 zip 文件即为 Magisk+riru 模块&lt;br /&gt;
