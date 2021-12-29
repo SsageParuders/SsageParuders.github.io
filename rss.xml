@@ -211,8 +211,7 @@
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292307269.png&#34; alt=&#34;8&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;README 是介绍文档&lt;br /&gt;
  &lt;code&gt;module.gradle&lt;/code&gt;  是模块的一些信息 可以适当修改&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292312685.png&#34; alt=&#34;9&#34; /&gt;&lt;br /&gt;
- 目录中的 &lt;code&gt;game.h&lt;/code&gt;  是重点 接下来着重介绍&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292312685.png&#34; alt=&#34;9&#34; /&gt; 目录中的 &lt;code&gt;game.h&lt;/code&gt;  是重点 接下来着重介绍&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ol&gt;
 &lt;li&gt;修改 &lt;code&gt;game.h&lt;/code&gt;  中的 GamePackageName 为对应游戏的包名&lt;br /&gt;
@@ -235,7 +234,7 @@
 &lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;本次实验必须为真机环境&lt;br /&gt;
 原因是 riru 的工作原理和 Zygote 注入有关系&lt;br /&gt;
-而 Zygote 这个东西 只有真机拥有 虚拟机 / 模拟器是没有的&lt;/p&gt;
+而 Zygote 这个东西 只有真机拥有  &lt;code&gt;虚拟机/模拟器&lt;/code&gt; 是没有的&lt;/p&gt;
 &lt;/div&gt;
 &lt;h1 id=&#34;浅谈攻防安全&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浅谈攻防安全&#34;&gt;#&lt;/a&gt; 浅谈攻防安全&lt;/h1&gt;
 &lt;ul&gt;
@@ -462,8 +461,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
+            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
