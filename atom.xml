@@ -173,7 +173,6 @@
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper&lt;/h1&gt;
-&lt;h3 id=&#34;riru-il2cppdumper介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper介绍&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper 介绍&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;一般情况下 只有对资源文件做了严格加密的 Unity 游戏&lt;br /&gt;
 才会用到 Riru-Il2CppDumper 进行 dump&lt;br /&gt;
@@ -208,7 +207,6 @@
  &lt;code&gt;module.gradle&lt;/code&gt;  是模块的一些信息 可以适当修改&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292312685.png&#34; alt=&#34;9&#34; /&gt; 目录中的 &lt;code&gt;game.h&lt;/code&gt;  是重点 接下来着重介绍&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;riru-il2cppdumper步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper步骤&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper 步骤&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;修改 &lt;code&gt;game.h&lt;/code&gt;  中的 GamePackageName 为对应游戏的包名&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292319515.png&#34; alt=&#34;10&#34; /&gt;&lt;/li&gt;
@@ -226,6 +224,17 @@
 &lt;li&gt;准备一台 root 好了的真机 刷好 Magisk 和 riru 环境&lt;br /&gt;
 &lt;s class=&#34;danger&#34;&gt;关于各类机型如何刷入 / 是否能刷好 Magisk 的 root 环境 有机会我也写一篇教学单独聊聊&lt;/s&gt;&lt;br /&gt;
 按照刷入普通模块的方式 刷入我们制作的 &lt;code&gt;riru-il2cppdumper.zip&lt;/code&gt;  模块&lt;/li&gt;
+&lt;li&gt;如图 在刷入模块之前 /data/data/GamePackageName (包名)/ 目录下没有目标文件&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300043799.png&#34; alt=&#34;15&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;在刷入模块以后 启动对应的 Unity 游戏&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300059809.png&#34; alt=&#34;16&#34; /&gt;&lt;ins&gt; 在游戏开启完全以后 (目的是完全载入 &lt;code&gt;il2cpp.so&lt;/code&gt; )&lt;/ins&gt;&lt;br /&gt;
+ 回到目标目录下发现 在 /data/data/GamePackageName (包名)/files 下 已经存在 dump.cs 文件&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300101925.png&#34; alt=&#34;17&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;details class=&#34;danger&#34;&gt;&lt;summary&gt;注意事项&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;这款游戏的加密安全做的比较到位&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;本次实验必须为真机环境&lt;br /&gt;
