@@ -208,6 +208,7 @@
 &lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;Android 项目相关的依赖环境请自行提前布置&lt;/p&gt;
 &lt;/div&gt;
+&lt;h3 id=&#34;资源介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#资源介绍&#34;&gt;#&lt;/a&gt; 资源介绍&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;打开 Android Studio 并且从 GitHub 上 clone 下 Riru-Il2cppdumper 项目&lt;br /&gt;
  clone 后如下所示:&lt;br /&gt;
@@ -216,6 +217,7 @@
  &lt;code&gt;module.gradle&lt;/code&gt;  是模块的一些信息 可以适当修改&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292312685.png&#34; alt=&#34;9&#34; /&gt; 目录中的 &lt;code&gt;game.h&lt;/code&gt;  是重点 接下来着重介绍&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;具体步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#具体步骤&#34;&gt;#&lt;/a&gt; 具体步骤&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;修改 &lt;code&gt;game.h&lt;/code&gt;  中的 GamePackageName 为对应游戏的包名&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292319515.png&#34; alt=&#34;10&#34; /&gt;&lt;/li&gt;
@@ -234,41 +236,46 @@
 &lt;s class=&#34;danger&#34;&gt;关于各类机型如何刷入 / 是否能刷好 Magisk 的 root 环境 有机会我也写一篇教学单独聊聊&lt;/s&gt;&lt;br /&gt;
 按照刷入普通模块的方式 刷入我们制作的 &lt;code&gt;riru-il2cppdumper.zip&lt;/code&gt;  模块&lt;/li&gt;
 &lt;li&gt;如图 在刷入模块之前 /data/data/GamePackageName (包名)/ 目录下没有目标文件&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300043799.png&#34; alt=&#34;15&#34; /&gt;&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300043799.png&#34; alt=&#34;15&#34; width=&#34;600px&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;在刷入模块以后 启动对应的 Unity 游戏&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300059809.png&#34; alt=&#34;16&#34; /&gt;&lt;ins&gt; 在游戏开启完全以后 (目的是完全载入 &lt;code&gt;il2cpp.so&lt;/code&gt; )&lt;/ins&gt;&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300059809.png&#34; alt=&#34;16&#34; width=&#34;400px&#34; /&gt;&lt;ins&gt; 在游戏开启完全以后 (目的是完全载入 &lt;code&gt;il2cpp.so&lt;/code&gt; )&lt;/ins&gt;&lt;br /&gt;
  回到目标目录下发现 在 /data/data/GamePackageName (包名)/files 下 已经存在 dump.cs 文件&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300101925.png&#34; alt=&#34;17&#34; /&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;details class=&#34;danger&#34;&gt;&lt;summary&gt;注意事项&lt;/summary&gt;&lt;div&gt;
-&lt;p&gt;这款游戏的加密安全做的比较到位&lt;/p&gt;
-&lt;/div&gt;&lt;/details&gt;
-&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300101925.png&#34; alt=&#34;17&#34; width=&#34;600px&#34; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;h3 id=&#34;特别提醒&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#特别提醒&#34;&gt;#&lt;/a&gt; 特别提醒&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这款游戏的加密安全做的比较到位&lt;br /&gt;
+我是受一位朋友委托 对这款游戏进行安全测试&lt;br /&gt;
+在测试过程中 由于技术水平有限 被迫使用 Riru-Il2cppdumper&lt;br /&gt;
+ 编译完成模块以后 在我的开发测试机中&lt;br /&gt;
+对这款游戏的 dump 一次成功 直接输出了 dump.cs&lt;br /&gt;
+ 但是朋友使用我的模块无法输出 dump.cs&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;因此&lt;/p&gt;
+&lt;details class=&#34;danger&#34;&gt;&lt;summary&gt;注意事项&lt;/summary&gt;&lt;div&gt;
+&lt;/div&gt;&lt;/details&gt;
 &lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;本次实验必须为真机环境&lt;br /&gt;
 原因是 riru 的工作原理和 Zygote 注入有关系&lt;br /&gt;
 而 Zygote 这个东西 只有真机拥有  &lt;code&gt;虚拟机/模拟器&lt;/code&gt; 是没有的&lt;/p&gt;
 &lt;/div&gt;
 &lt;h1 id=&#34;浅谈攻防安全&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浅谈攻防安全&#34;&gt;#&lt;/a&gt; 浅谈攻防安全&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;对于安全防御方来说&lt;br /&gt;
-对 &lt;code&gt;global-metadata.dat&lt;/code&gt;  做必要的加密是有必要的&lt;br /&gt;
-建议同时对 &lt;code&gt;i l.so&lt;/code&gt;  做加壳防御&lt;br /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;攻防无绝对 技术无黑白&lt;br /&gt;
+愿每一位安全从业者静有所思&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;对于安全防御方来说&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对于安全防御方来说&#34;&gt;#&lt;/a&gt; 对于安全防御方来说&lt;/h2&gt;
+&lt;p&gt;对 &lt;code&gt;global-metadata.dat&lt;/code&gt;  做必要的加密是有必要的&lt;br /&gt;
+建议同时对 &lt;code&gt;il2cpp.so&lt;/code&gt;  做加壳防御&lt;br /&gt;
 将游戏内关键的一些方法名&lt;br /&gt;
 另取名为怪僻的方法名 或对方法名做混淆&lt;br /&gt;
 以此干扰逆向难度&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;对安全攻击方来说&lt;br /&gt;
-想要流畅的应对各种 Unity 项目的防御手段&lt;br /&gt;
+&lt;h2 id=&#34;对安全攻击方来说&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对安全攻击方来说&#34;&gt;#&lt;/a&gt; 对安全攻击方来说&lt;/h2&gt;
+&lt;p&gt;想要流畅的应对各种 Unity 项目的防御手段&lt;br /&gt;
 一方面需要掌握基础的 Unity 项目正向开发基础&lt;br /&gt;
 另一方面需要去苦读 Unity 引擎源码&lt;br /&gt;
 去了解 Unity 项目的特征&lt;br /&gt;
 从特征出发往往能锻炼自主逆向的能力&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
  ]]></description>
         </item>
         <item>
@@ -475,8 +482,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-            <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
             <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
+            <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
