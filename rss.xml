@@ -32,7 +32,7 @@
  老版本的 Unity 游戏开发 都是典型的依托于 mono 编译&lt;br /&gt;
 后受到版权 / 效率 / 维护等各方面因素影响&lt;br /&gt;
  Unity 统一采用 IL2CPP 体系 将中间语言 IL 转化为 cpp 执行&lt;br /&gt;
-因此 对目前的 Unity 系 进程 dump 时 主要目标是 &lt;code&gt;li2cpp.so&lt;/code&gt;  文件&lt;/p&gt;
+因此 对目前的 Unity 系 进行 dump 时 主要目标是 &lt;code&gt;li2cpp.so&lt;/code&gt;  文件&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;本文仅且只做技术安全研讨 愿每一位安全从业者静有所思&lt;br /&gt;
@@ -94,7 +94,8 @@
 在 &lt;code&gt;dump.cs&lt;/code&gt;  中 内部方法名和偏移已经一清二楚&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112290340017.png&#34; alt=&#34;5&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;除了 &lt;code&gt;dump.cs&lt;/code&gt; ，还有一些其他文件 各有其他用处&lt;br /&gt;
-比如 il2cpp.h 中包含了结构体的头文件等等&lt;br /&gt;
+比如 il2cpp.h 是包含了结构体的头文件&lt;br /&gt;
+ DummyDll 中的 dll 经过反编译以后可以查看到更完善的方法类或接口信息&lt;br /&gt;
 具体可以参考 Il2cppdumper 的 README&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;note info&#34;&gt;
@@ -105,7 +106,18 @@
 手工模式中 需要手动指定两处指针地址&lt;br /&gt;
 新版的 Il2cppdumper 中 做了一定优化&lt;br /&gt;
 不再需要手工模式 优化为全自动处理&lt;br /&gt;
-但在对 dump 进行一定的&lt;/p&gt;
+但在在 Unity 项目做了一定加密的情况下&lt;br /&gt;
+手动利用反汇编工具寻找 Unity 源码特征能起到一定的解密作用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;dump 的产物最多只能显示:&lt;br /&gt;
+ 属性，方法类和接口以及他们在 so 中的偏移位置&lt;br /&gt;
+但是无法显示内部具体逻辑&lt;br /&gt;
+不过根据方法类 / 接口的名字&lt;br /&gt;
+大致可以对其作用进行猜测 有助于逆向分析&lt;br /&gt;
+想要了解内部实现的具体逻辑&lt;br /&gt;
+应该用 dump 产物的信息去结合 ida 进行分析&lt;br /&gt;
+相关分析手法后面有机会再详细记录&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;稍作加密的项目如何处理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#稍作加密的项目如何处理&#34;&gt;#&lt;/a&gt; 稍作加密的项目如何处理&lt;/h2&gt;
 &lt;h1 id=&#34;riru-il2cppdumper&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#riru-il2cppdumper&#34;&gt;#&lt;/a&gt; Riru-Il2cppdumper&lt;/h1&gt;
