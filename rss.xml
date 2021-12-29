@@ -208,7 +208,7 @@
 &lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;Android 项目相关的依赖环境请自行提前布置&lt;/p&gt;
 &lt;/div&gt;
-&lt;h3 id=&#34;资源介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#资源介绍&#34;&gt;#&lt;/a&gt; 资源介绍&lt;/h3&gt;
+&lt;h2 id=&#34;资源介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#资源介绍&#34;&gt;#&lt;/a&gt; 资源介绍&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;打开 Android Studio 并且从 GitHub 上 clone 下 Riru-Il2cppdumper 项目&lt;br /&gt;
  clone 后如下所示:&lt;br /&gt;
@@ -217,7 +217,7 @@
  &lt;code&gt;module.gradle&lt;/code&gt;  是模块的一些信息 可以适当修改&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292312685.png&#34; alt=&#34;9&#34; /&gt; 目录中的 &lt;code&gt;game.h&lt;/code&gt;  是重点 接下来着重介绍&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;具体步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#具体步骤&#34;&gt;#&lt;/a&gt; 具体步骤&lt;/h3&gt;
+&lt;h2 id=&#34;具体步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#具体步骤&#34;&gt;#&lt;/a&gt; 具体步骤&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;修改 &lt;code&gt;game.h&lt;/code&gt;  中的 GamePackageName 为对应游戏的包名&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292319515.png&#34; alt=&#34;10&#34; /&gt;&lt;/li&gt;
@@ -242,7 +242,7 @@
  回到目标目录下发现 在 /data/data/GamePackageName (包名)/files 下 已经存在 dump.cs 文件&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300101925.png&#34; alt=&#34;17&#34; width=&#34;400px&#34; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;特别提醒&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#特别提醒&#34;&gt;#&lt;/a&gt; 特别提醒&lt;/h3&gt;
+&lt;h2 id=&#34;特别提醒&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#特别提醒&#34;&gt;#&lt;/a&gt; 特别提醒&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这款游戏的加密安全做的比较到位&lt;br /&gt;
 我是受一位朋友委托 对这款游戏进行安全测试&lt;br /&gt;
@@ -262,7 +262,8 @@
 &lt;p&gt;所以&lt;/p&gt;
 &lt;details class=&#34;danger&#34;&gt;&lt;summary&gt;注意事项&lt;/summary&gt;&lt;div&gt;
 &lt;p&gt;Riru-Il2cppdumper 要求 Unity 项目可以正常的完全加载&lt;br /&gt;
-要求 &lt;code&gt;il2cpp.so&lt;/code&gt;  完全运行&lt;/p&gt;
+要求 &lt;code&gt;il2cpp.so&lt;/code&gt;  完全运行&lt;br /&gt;
+因此 攻击者应当&lt;/p&gt;
 &lt;/div&gt;&lt;/details&gt;
 &lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;本次实验必须为真机环境&lt;br /&gt;
