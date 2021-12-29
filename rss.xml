@@ -224,7 +224,7 @@
 &lt;li&gt;按照&lt;a href=&#34;https://blog.hongqing.online/android/androidsecurity/Il2cppdumper/#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B-unity-%E9%A1%B9%E7%9B%AE%E7%9A%84%E5%BC%95%E6%93%8E%E7%89%88%E6%9C%AC&#34;&gt;上文所述&lt;/a&gt; 查看游戏 Unity 项目的引擎版本&lt;/li&gt;
 &lt;li&gt;根据游戏的版本号 对应找到其所属的版本区间&lt;br /&gt;
 将版本区间前的值 覆写到 UnityVersion 上去&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292324508.png&#34; alt=&#34;11&#34; /&gt;&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292324508.png&#34; alt=&#34;11&#34; width=&#34;400px&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;最终如下图所示:&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112292343087.png&#34; alt=&#34;12&#34; /&gt;&lt;span class=&#34;label danger&#34;&gt; 由于需要对游戏做脱敏处理 包名暂时不予显示&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;点击 &lt;code&gt;小锤子&lt;/code&gt; 进行 build 等待 build 结束&lt;br /&gt;
@@ -236,11 +236,11 @@
 &lt;s class=&#34;danger&#34;&gt;关于各类机型如何刷入 / 是否能刷好 Magisk 的 root 环境 有机会我也写一篇教学单独聊聊&lt;/s&gt;&lt;br /&gt;
 按照刷入普通模块的方式 刷入我们制作的 &lt;code&gt;riru-il2cppdumper.zip&lt;/code&gt;  模块&lt;/li&gt;
 &lt;li&gt;如图 在刷入模块之前 /data/data/GamePackageName (包名)/ 目录下没有目标文件&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300043799.png&#34; alt=&#34;15&#34; width=&#34;600px&#34; /&gt;&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300043799.png&#34; alt=&#34;15&#34; width=&#34;400px&#34; /&gt;&lt;/li&gt;
 &lt;li&gt;在刷入模块以后 启动对应的 Unity 游戏&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300059809.png&#34; alt=&#34;16&#34; width=&#34;400px&#34; /&gt;&lt;ins&gt; 在游戏开启完全以后 (目的是完全载入 &lt;code&gt;il2cpp.so&lt;/code&gt; )&lt;/ins&gt;&lt;br /&gt;
  回到目标目录下发现 在 /data/data/GamePackageName (包名)/files 下 已经存在 dump.cs 文件&lt;br /&gt;
-&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300101925.png&#34; alt=&#34;17&#34; width=&#34;600px&#34; /&gt;&lt;/li&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202112300101925.png&#34; alt=&#34;17&#34; width=&#34;400px&#34; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;特别提醒&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#特别提醒&#34;&gt;#&lt;/a&gt; 特别提醒&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -482,8 +482,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidsecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
+            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
