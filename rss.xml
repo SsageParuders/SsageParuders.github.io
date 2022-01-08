@@ -49,11 +49,11 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://blog.hongqing.online/android/androidSecurity/Il2cppdumper/</guid>
+            <guid isPermalink="true">https://blog.hongqing.online/android/android-security/Il2cppdumper/</guid>
             <title>Il2cppdumper使用教程</title>
-            <link>https://blog.hongqing.online/android/androidSecurity/Il2cppdumper/</link>
+            <link>https://blog.hongqing.online/android/android-security/Il2cppdumper/</link>
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-            <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidSecurity/" />
+            <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/android-security/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <category term="教程向" scheme="https://blog.hongqing.online/tags/%E6%95%99%E7%A8%8B%E5%90%91/" />
             <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
@@ -536,11 +536,11 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://blog.hongqing.online/android/androidSecurity/AndroidArmInlineHook/</guid>
+            <guid isPermalink="true">https://blog.hongqing.online/android/android-security/AndroidArmInlineHook/</guid>
             <title>【转载】Android Arm Inline Hook</title>
-            <link>https://blog.hongqing.online/android/androidSecurity/AndroidArmInlineHook/</link>
+            <link>https://blog.hongqing.online/android/android-security/AndroidArmInlineHook/</link>
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-            <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidSecurity/" />
+            <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/android-security/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
             <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
