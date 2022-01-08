@@ -11,9 +11,9 @@
     <updated>2022-01-08T10:28:25.000Z</updated>
     <category term="SsageParuders" />
     <entry>
-        <id>https://blog.hongqing.online/arith&amp;structure/ArithStart/</id>
+        <id>https://blog.hongqing.online/arith-structure/ArithStart/</id>
         <title>算法与数据结构的开始</title>
-        <link rel="alternate" href="https://blog.hongqing.online/arith&amp;structure/ArithStart/"/>
+        <link rel="alternate" href="https://blog.hongqing.online/arith-structure/ArithStart/"/>
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
 自然是需要编译器&lt;br /&gt;
@@ -28,9 +28,9 @@
         <updated>2022-01-08T10:28:25.000Z</updated>
     </entry>
     <entry>
-        <id>https://blog.hongqing.online/study/c&amp;cpp/StudyCmake/</id>
+        <id>https://blog.hongqing.online/study/c-cpp/StudyCmake/</id>
         <title>Cmake学习笔记</title>
-        <link rel="alternate" href="https://blog.hongqing.online/study/c&amp;cpp/StudyCmake/"/>
+        <link rel="alternate" href="https://blog.hongqing.online/study/c-cpp/StudyCmake/"/>
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
 自然是需要编译器&lt;br /&gt;

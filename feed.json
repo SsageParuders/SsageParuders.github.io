@@ -7,8 +7,8 @@
     "home_page_url": "https://blog.hongqing.online",
     "items": [
         {
-            "id": "https://blog.hongqing.online/arith&structure/ArithStart/",
-            "url": "https://blog.hongqing.online/arith&structure/ArithStart/",
+            "id": "https://blog.hongqing.online/arith-structure/ArithStart/",
+            "url": "https://blog.hongqing.online/arith-structure/ArithStart/",
             "title": "算法与数据结构的开始",
             "date_published": "2022-01-08T10:28:25.000Z",
             "content_html": "<blockquote>\n<p>C 和 C++ 源码文件想要进行编译<br />\n自然是需要编译器<br />\n于此同时 为了方便项目整体的构建</p>\n</blockquote>\n<p>cmake -GNinja -DCMAKE_MAKE_PROGRAM=/Users/hongqing/Downloads/ninja -DCMAKE_ANDROID_NDK=/Users/hongqing/Library/Android/sdk/ndk/23.0.7599858 <br />\n-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \\ -DCMAKE_TOOLCHAIN_FILE=toolchains/android.cmake ..</p>\n",
@@ -19,8 +19,8 @@
             ]
         },
         {
-            "id": "https://blog.hongqing.online/study/c&cpp/StudyCmake/",
-            "url": "https://blog.hongqing.online/study/c&cpp/StudyCmake/",
+            "id": "https://blog.hongqing.online/study/c-cpp/StudyCmake/",
+            "url": "https://blog.hongqing.online/study/c-cpp/StudyCmake/",
             "title": "Cmake学习笔记",
             "date_published": "2022-01-04T21:42:25.000Z",
             "content_html": "<blockquote>\n<p>C 和 C++ 源码文件想要进行编译<br />\n自然是需要编译器<br />\n于此同时 为了方便项目整体的构建</p>\n</blockquote>\n<p>cmake -GNinja -DCMAKE_MAKE_PROGRAM=/Users/hongqing/Downloads/ninja -DCMAKE_ANDROID_NDK=/Users/hongqing/Library/Android/sdk/ndk/23.0.7599858 <br />\n-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \\ -DCMAKE_TOOLCHAIN_FILE=toolchains/android.cmake ..</p>\n",
