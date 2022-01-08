@@ -7,15 +7,15 @@
     "home_page_url": "https://blog.hongqing.online",
     "items": [
         {
-            "id": "https://blog.hongqing.online/arith-structure/ArithStart/",
-            "url": "https://blog.hongqing.online/arith-structure/ArithStart/",
-            "title": "算法与数据结构的开始",
+            "id": "https://blog.hongqing.online/structure-arith/ArithStart/",
+            "url": "https://blog.hongqing.online/structure-arith/ArithStart/",
+            "title": "数据结构与算法的开始",
             "date_published": "2022-01-08T10:28:25.000Z",
-            "content_html": "<p>未完待续</p>\n",
+            "content_html": "<h1 id=\"数据结构主要学习什么\"><a class=\"anchor\" href=\"#数据结构主要学习什么\">#</a> 数据结构主要学习什么</h1>\n",
             "tags": [
-                "算法与数据结构",
+                "数据结构与算法",
                 "笔记向",
-                "算法与数据结构"
+                "数据结构与算法"
             ]
         },
         {
@@ -23,7 +23,7 @@
             "url": "https://blog.hongqing.online/study/c-cpp/CMakeStudy/",
             "title": "CMake学习笔记",
             "date_published": "2022-01-04T21:42:25.000Z",
-            "content_html": "<blockquote>\n<p>C 和 C<ins> 源码文件想要编译成可执行文件或依赖库 (dll,so...)<br />\n 最原始的操作 自然是需要在命令行下<br />\n使用编译器 一条条命令的输入<br />\n如果每一份源码都使用命令行单独编译 效率难免低下<br />\n为了提高项目编译时期的效率 出现了很多的项目构建体系<br />\n比如：安卓开发时常见的 gradle 构建体系<br />\n再比如本次介绍的构建 C/C</ins> 项目使用的 CMake 体系</p>\n</blockquote>\n<div class=\"note info\">\n<p>C/C<ins> 构建体系其实有很多种 这里只介绍 CMake<br />\n 只是因为 CMake 体系比较常见 并且 CMake 体系跨平台可用<br />\n其他常见的 C/C</ins> 构建体系 比如微软的 MSBuild</p>\n</div>\n<details><summary>下载和安装</summary><div>\n<p>下载和安装直接去官网即可 地址如下:<br />\n<span class=\"exturl\" data-url=\"aHR0cHM6Ly9jbWFrZS5vcmc=\">https://cmake.org</span><br />\n 不同的平台下载不同的版本<br />\n PS: 我最喜欢 CMake 的交叉编译了～～</p>\n</div></details>\n<h1 id=\"cmake体系介绍\"><a class=\"anchor\" href=\"#cmake体系介绍\">#</a> CMake 体系介绍</h1>\n<p>大多数情况下 都是在命令行中使用 CMake<br />\n 因此 CMake 属于一个命令行工具 类似于  <code>ls</code>   <code>mkdir</code> <br />\n 我们可以通过 <code>man</code>  命令来查看 CMake 的具体使用</p>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">man</span> cmake <span class=\"token operator\">>></span> CMakeHelp.txt</pre></td></tr></table></figure><div class=\"note info\">\n<p>在 Linux 命令后面跟上符号  <code>&gt;&gt;</code>  + 自定义文件<br />\n即：将该命令的输出信息 写入到 自定义文件中</p>\n</div>\n<ul>\n<li>在 CMake 体系中 编译流程大概依靠于两个重点\n<ol>\n<li>编译时 传入 CMake 的参数</li>\n<li>编译前 针对项目所写的 <code>CMakeList.txt</code></li>\n</ol>\n</li>\n</ul>\n<h1 id=\"使用cmake体系构建第一个程序\"><a class=\"anchor\" href=\"#使用cmake体系构建第一个程序\">#</a> 使用 CMake 体系构建第一个程序</h1>\n<p>第一个程序 那必然是我们的 HelloWorld</p>\n<p>创建 main.cpp :</p>\n<figure class=\"highlight cpp\"><figcaption data-lang=\"C++\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>vim main<span class=\"token punctuation\">.</span>cpp</pre></td></tr></table></figure><h1 id=\"cmake工具的命令行参数\"><a class=\"anchor\" href=\"#cmake工具的命令行参数\">#</a> CMake 工具的命令行参数</h1>\n<h1 id=\"cmakelisttxt介绍\"><a class=\"anchor\" href=\"#cmakelisttxt介绍\">#</a>  <code>CMakeList.txt</code>  介绍</h1>\n<h1 id=\"cmakegui介绍和使用\"><a class=\"anchor\" href=\"#cmakegui介绍和使用\">#</a> CMakeGui 介绍和使用</h1>\n<p>其实吧 CMake 这个工具<br />\n绝大多数情况下 都是在命令行使用<br />\n CMakeGui 不说用不上 反正我是很少用到<br />\n这里简单说两句 适当了解即可</p>\n",
+            "content_html": "<blockquote>\n<p><code>C/C++</code>  源码文件想要编译成可执行文件或依赖库 (dll,so...)<br />\n 最原始的操作 自然是需要在命令行下<br />\n使用编译器 一条条命令的输入<br />\n如果每一份源码都使用命令行单独编译 效率难免低下<br />\n为了提高项目编译时期的效率 出现了很多的项目构建体系<br />\n比如：安卓开发时常见的 gradle 构建体系<br />\n再比如本次介绍的构建 <code>C/C++</code>  项目使用的 CMake 体系</p>\n</blockquote>\n<div class=\"note info\">\n<p><code>C/C++</code>  构建体系其实有很多种 这里只介绍 CMake<br />\n 只是因为 CMake 体系比较常见 并且 CMake 体系跨平台可用<br />\n其他常见的 <code>C/C++</code>  构建体系 比如微软的 MSBuild</p>\n</div>\n<details><summary>下载和安装</summary><div>\n<p>下载和安装直接去官网即可 地址如下:<br />\n<span class=\"exturl\" data-url=\"aHR0cHM6Ly9jbWFrZS5vcmc=\">https://cmake.org</span><br />\n 不同的平台下载不同的版本<br />\n PS: 我最喜欢 CMake 的交叉编译了～～</p>\n</div></details>\n<h1 id=\"cmake体系介绍\"><a class=\"anchor\" href=\"#cmake体系介绍\">#</a> CMake 体系介绍</h1>\n<p>大多数情况下 都是在命令行中使用 CMake<br />\n 因此 CMake 属于一个命令行工具 类似于  <code>ls</code>   <code>mkdir</code> <br />\n 我们可以通过 <code>man</code>  命令来查看 CMake 的具体使用</p>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">man</span> cmake <span class=\"token operator\">>></span> CMakeHelp.txt</pre></td></tr></table></figure><div class=\"note info\">\n<p>在 Linux 命令后面跟上符号  <code>&gt;&gt;</code>  + 自定义文件<br />\n即：将该命令的输出信息 写入到 自定义文件中</p>\n</div>\n<ul>\n<li>在 CMake 体系中 编译流程大概依靠于两个重点\n<ol>\n<li>编译时 传入 CMake 的参数</li>\n<li>编译前 针对项目所写的 <code>CMakeList.txt</code></li>\n</ol>\n</li>\n</ul>\n<h1 id=\"使用cmake体系构建第一个程序\"><a class=\"anchor\" href=\"#使用cmake体系构建第一个程序\">#</a> 使用 CMake 体系构建第一个程序</h1>\n<p>第一个程序 那必然是我们的 HelloWorld<br />\n 创建 main.cpp :</p>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token function\">vim</span> main.cpp</pre></td></tr></table></figure><h1 id=\"cmake工具的命令行参数\"><a class=\"anchor\" href=\"#cmake工具的命令行参数\">#</a> CMake 工具的命令行参数</h1>\n<h1 id=\"cmakelisttxt介绍\"><a class=\"anchor\" href=\"#cmakelisttxt介绍\">#</a>  <code>CMakeList.txt</code>  介绍</h1>\n<h1 id=\"cmakegui介绍和使用\"><a class=\"anchor\" href=\"#cmakegui介绍和使用\">#</a> CMakeGui 介绍和使用</h1>\n<p>其实吧 CMake 这个工具<br />\n绝大多数情况下 都是在命令行使用<br />\n CMakeGui 不说用不上 反正我是很少用到<br />\n这里简单说两句 适当了解即可</p>\n",
             "tags": [
                 "Study",
                 "C/Cpp&Study",

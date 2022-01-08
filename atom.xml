@@ -11,14 +11,14 @@
     <updated>2022-01-08T10:28:25.000Z</updated>
     <category term="SsageParuders" />
     <entry>
-        <id>https://blog.hongqing.online/arith-structure/ArithStart/</id>
-        <title>算法与数据结构的开始</title>
-        <link rel="alternate" href="https://blog.hongqing.online/arith-structure/ArithStart/"/>
-        <content type="html">&lt;p&gt;未完待续&lt;/p&gt;
+        <id>https://blog.hongqing.online/structure-arith/ArithStart/</id>
+        <title>数据结构与算法的开始</title>
+        <link rel="alternate" href="https://blog.hongqing.online/structure-arith/ArithStart/"/>
+        <content type="html">&lt;h1 id=&#34;数据结构主要学习什么&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数据结构主要学习什么&#34;&gt;#&lt;/a&gt; 数据结构主要学习什么&lt;/h1&gt;
 </content>
-        <category term="算法与数据结构" scheme="https://blog.hongqing.online/categories/arith-structure/" />
+        <category term="数据结构与算法" scheme="https://blog.hongqing.online/categories/structure-arith/" />
         <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
-        <category term="算法与数据结构" scheme="https://blog.hongqing.online/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" />
+        <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
         <updated>2022-01-08T10:28:25.000Z</updated>
     </entry>
     <entry>
@@ -26,18 +26,18 @@
         <title>CMake学习笔记</title>
         <link rel="alternate" href="https://blog.hongqing.online/study/c-cpp/CMakeStudy/"/>
         <content type="html">&lt;blockquote&gt;
-&lt;p&gt;C 和 C&lt;ins&gt; 源码文件想要编译成可执行文件或依赖库 (dll,so...)&lt;br /&gt;
+&lt;p&gt;&lt;code&gt;C/C++&lt;/code&gt;  源码文件想要编译成可执行文件或依赖库 (dll,so...)&lt;br /&gt;
  最原始的操作 自然是需要在命令行下&lt;br /&gt;
 使用编译器 一条条命令的输入&lt;br /&gt;
 如果每一份源码都使用命令行单独编译 效率难免低下&lt;br /&gt;
 为了提高项目编译时期的效率 出现了很多的项目构建体系&lt;br /&gt;
 比如：安卓开发时常见的 gradle 构建体系&lt;br /&gt;
-再比如本次介绍的构建 C/C&lt;/ins&gt; 项目使用的 CMake 体系&lt;/p&gt;
+再比如本次介绍的构建 &lt;code&gt;C/C++&lt;/code&gt;  项目使用的 CMake 体系&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;div class=&#34;note info&#34;&gt;
-&lt;p&gt;C/C&lt;ins&gt; 构建体系其实有很多种 这里只介绍 CMake&lt;br /&gt;
+&lt;p&gt;&lt;code&gt;C/C++&lt;/code&gt;  构建体系其实有很多种 这里只介绍 CMake&lt;br /&gt;
  只是因为 CMake 体系比较常见 并且 CMake 体系跨平台可用&lt;br /&gt;
-其他常见的 C/C&lt;/ins&gt; 构建体系 比如微软的 MSBuild&lt;/p&gt;
+其他常见的 &lt;code&gt;C/C++&lt;/code&gt;  构建体系 比如微软的 MSBuild&lt;/p&gt;
 &lt;/div&gt;
 &lt;details&gt;&lt;summary&gt;下载和安装&lt;/summary&gt;&lt;div&gt;
 &lt;p&gt;下载和安装直接去官网即可 地址如下:&lt;br /&gt;
@@ -62,9 +62,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;使用cmake体系构建第一个程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用cmake体系构建第一个程序&#34;&gt;#&lt;/a&gt; 使用 CMake 体系构建第一个程序&lt;/h1&gt;
-&lt;p&gt;第一个程序 那必然是我们的 HelloWorld&lt;/p&gt;
-&lt;p&gt;创建 main.cpp :&lt;/p&gt;
-&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;figcaption data-lang=&#34;C++&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;vim main&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;cpp&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;cmake工具的命令行参数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmake工具的命令行参数&#34;&gt;#&lt;/a&gt; CMake 工具的命令行参数&lt;/h1&gt;
+&lt;p&gt;第一个程序 那必然是我们的 HelloWorld&lt;br /&gt;
+ 创建 main.cpp :&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; main.cpp&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;cmake工具的命令行参数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmake工具的命令行参数&#34;&gt;#&lt;/a&gt; CMake 工具的命令行参数&lt;/h1&gt;
 &lt;h1 id=&#34;cmakelisttxt介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmakelisttxt介绍&#34;&gt;#&lt;/a&gt;  &lt;code&gt;CMakeList.txt&lt;/code&gt;  介绍&lt;/h1&gt;
 &lt;h1 id=&#34;cmakegui介绍和使用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmakegui介绍和使用&#34;&gt;#&lt;/a&gt; CMakeGui 介绍和使用&lt;/h1&gt;
 &lt;p&gt;其实吧 CMake 这个工具&lt;br /&gt;
