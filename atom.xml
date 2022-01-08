@@ -11,9 +11,27 @@
     <updated>2022-01-04T21:42:25.000Z</updated>
     <category term="SsageParuders" />
     <entry>
-        <id>https://blog.hongqing.online/study/c&amp;cpp/StudyCamke/</id>
+        <id>https://blog.hongqing.online/arith&amp;structure/ArithStart/</id>
         <title>Cmake学习笔记</title>
-        <link rel="alternate" href="https://blog.hongqing.online/study/c&amp;cpp/StudyCamke/"/>
+        <link rel="alternate" href="https://blog.hongqing.online/arith&amp;structure/ArithStart/"/>
+        <content type="html">&lt;blockquote&gt;
+&lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
+自然是需要编译器&lt;br /&gt;
+于此同时 为了方便项目整体的构建&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;cmake -GNinja -DCMAKE_MAKE_PROGRAM=/Users/hongqing/Downloads/ninja -DCMAKE_ANDROID_NDK=/Users/hongqing/Library/Android/sdk/ndk/23.0.7599858 &lt;br /&gt;
+-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \ -DCMAKE_TOOLCHAIN_FILE=toolchains/android.cmake ..&lt;/p&gt;
+</content>
+        <category term="Study" scheme="https://blog.hongqing.online/categories/study/" />
+        <category term="C/Cpp&amp;Study" scheme="https://blog.hongqing.online/categories/study/c-cpp/" />
+        <category term="C/C++" scheme="https://blog.hongqing.online/tags/C-C/" />
+        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <updated>2022-01-04T21:42:25.000Z</updated>
+    </entry>
+    <entry>
+        <id>https://blog.hongqing.online/study/c&amp;cpp/StudyCmake/</id>
+        <title>Cmake学习笔记</title>
+        <link rel="alternate" href="https://blog.hongqing.online/study/c&amp;cpp/StudyCmake/"/>
         <content type="html">&lt;blockquote&gt;
 &lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
 自然是需要编译器&lt;br /&gt;
