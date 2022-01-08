@@ -17,18 +17,11 @@
             <guid isPermalink="true">https://blog.hongqing.online/arith&amp;structure/ArithStart/</guid>
             <title>Cmake学习笔记</title>
             <link>https://blog.hongqing.online/arith&amp;structure/ArithStart/</link>
-            <category term="Study" scheme="https://blog.hongqing.online/categories/study/" />
-            <category term="C/Cpp&amp;Study" scheme="https://blog.hongqing.online/categories/study/c-cpp/" />
-            <category term="C/C++" scheme="https://blog.hongqing.online/tags/C-C/" />
+            <category term="算法与数据结构" scheme="https://blog.hongqing.online/categories/arith-structure/" />
+            <category term="算法与数据结构" scheme="https://blog.hongqing.online/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" />
             <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <pubDate>Wed, 05 Jan 2022 05:42:25 +0800</pubDate>
-            <description><![CDATA[ &lt;blockquote&gt;
-&lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
-自然是需要编译器&lt;br /&gt;
-于此同时 为了方便项目整体的构建&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;cmake -GNinja -DCMAKE_MAKE_PROGRAM=/Users/hongqing/Downloads/ninja -DCMAKE_ANDROID_NDK=/Users/hongqing/Library/Android/sdk/ndk/23.0.7599858 &lt;br /&gt;
--DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \ -DCMAKE_TOOLCHAIN_FILE=toolchains/android.cmake ..&lt;/p&gt;
+            <description><![CDATA[ &lt;p&gt;未完待续&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -37,8 +30,8 @@
             <link>https://blog.hongqing.online/study/c&amp;cpp/StudyCmake/</link>
             <category term="Study" scheme="https://blog.hongqing.online/categories/study/" />
             <category term="C/Cpp&amp;Study" scheme="https://blog.hongqing.online/categories/study/c-cpp/" />
-            <category term="C/C++" scheme="https://blog.hongqing.online/tags/C-C/" />
             <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+            <category term="C/C++" scheme="https://blog.hongqing.online/tags/C-C/" />
             <pubDate>Wed, 05 Jan 2022 05:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
