@@ -18,10 +18,16 @@
             <title>算法与数据结构的开始</title>
             <link>https://blog.hongqing.online/arith&amp;structure/ArithStart/</link>
             <category term="算法与数据结构" scheme="https://blog.hongqing.online/categories/arith-structure/" />
-            <category term="算法与数据结构" scheme="https://blog.hongqing.online/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" />
             <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+            <category term="算法与数据结构" scheme="https://blog.hongqing.online/tags/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" />
             <pubDate>Sat, 08 Jan 2022 18:28:25 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;未完待续&lt;/p&gt;
+            <description><![CDATA[ &lt;blockquote&gt;
+&lt;p&gt;C 和 C++ 源码文件想要进行编译&lt;br /&gt;
+自然是需要编译器&lt;br /&gt;
+于此同时 为了方便项目整体的构建&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;cmake -GNinja -DCMAKE_MAKE_PROGRAM=/Users/hongqing/Downloads/ninja -DCMAKE_ANDROID_NDK=/Users/hongqing/Library/Android/sdk/ndk/23.0.7599858 &lt;br /&gt;
+-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \ -DCMAKE_TOOLCHAIN_FILE=toolchains/android.cmake ..&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -337,8 +343,8 @@
             <title>Git学习笔记</title>
             <link>https://blog.hongqing.online/skills/GitStudy/</link>
             <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
+            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <pubDate>Fri, 24 Dec 2021 15:46:25 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;git的工作区和版本库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git的工作区和版本库&#34;&gt;#&lt;/a&gt; Git 的工作区和版本库&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -536,8 +542,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
             <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/androidSecurity/" />
             <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
+            <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
             <pubDate>Fri, 24 Dec 2021 02:42:25 +0800</pubDate>
             <description><![CDATA[ &lt;blockquote&gt;
 &lt;p&gt;本文将结合本项目的源代码，详细阐述 Android Arm Inline Hook 的原理与实现过程。&lt;/p&gt;
