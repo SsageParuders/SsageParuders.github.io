@@ -65,7 +65,7 @@
 &lt;p&gt;不同的操作方式 决定底层用何种数据结构来存储数据&lt;/p&gt;
 &lt;h1 id=&#34;数据结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数据结构&#34;&gt;#&lt;/a&gt; 数据结构&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;数据与数据的关系&lt;/p&gt;
+&lt;p&gt;定义：数据与数据的关系&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;逻辑结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#逻辑结构&#34;&gt;#&lt;/a&gt; 逻辑结构&lt;/h2&gt;
 &lt;ul&gt;
@@ -186,7 +186,7 @@
 &lt;pre&gt;&lt;code&gt;- 与问题输入规模有关的 主要是一层循环迭代或者递归代码
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id=&#34;相关资料&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#相关资料&#34;&gt;#&lt;/a&gt; 相关资料&lt;/h3&gt;
-&lt;p class=&#34;gallery&#34;&gt;&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090834798.png&#34; alt=&#34;4&#34; /&gt;&lt;br /&gt;
+&lt;p class=&#34;gallery&#34;&gt;&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090834798.png&#34; alt=&#34;&#34; /&gt;&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090835834.png&#34; alt=&#34;5&#34; title=&#34;常见阶比较&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
