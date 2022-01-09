@@ -113,13 +113,13 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;线性结构的物理存储方式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#线性结构的物理存储方式&#34;&gt;#&lt;/a&gt; 线性结构的物理存储方式&lt;/h2&gt;
-&lt;ul class=&#34;gallery&#34; data-height=&#34;180&#34;&gt;
+&lt;ul class=&#34;gallery&#34; data-height=&#34;150&#34;&gt;
 &lt;li&gt;图解&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090841419.png&#34; alt=&#34;&#34; title=&#34;顺序&#34; /&gt;&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090842146.png&#34; alt=&#34;&#34; title=&#34;链式&#34; /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;树形结构的物理存储方式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#树形结构的物理存储方式&#34;&gt;#&lt;/a&gt; 树形结构的物理存储方式&lt;/h2&gt;
-&lt;ul class=&#34;gallery&#34; data-height=&#34;180&#34;&gt;
+&lt;ul class=&#34;gallery&#34; data-height=&#34;150&#34;&gt;
 &lt;li&gt;图解&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090845603.png&#34; alt=&#34;&#34; title=&#34;顺序&#34; /&gt;&lt;br /&gt;
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090847860.png&#34; alt=&#34;&#34; title=&#34;链式&#34; /&gt;&lt;/li&gt;
@@ -181,8 +181,8 @@
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090835834.png&#34; alt=&#34;&#34; title=&#34;常见阶比较&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="数据结构与算法" scheme="https://blog.hongqing.online/categories/structure-arith/" />
-        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
+        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <updated>2022-01-08T10:28:25.000Z</updated>
     </entry>
     <entry>
@@ -599,8 +599,8 @@
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;url&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; path/path&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# url 是指向的仓库地址 path/path 指向子模块目录&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 例如: git submodule add https://github.com/SsageParuders/hexo-theme-shoka themes/shoka&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 使用这个命令 取消子模块关联: git rm --cached themes/shoka&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 新出现的 .gitmodules 文件 是子模块的配置文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;克隆含有子模块的项目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#克隆含有子模块的项目&#34;&gt;#&lt;/a&gt; 克隆含有子模块的项目&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 当你在克隆这样的项目时 默认会包含该子模块目录 但其中还没有任何文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 你必须运行两个命令:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule init &lt;span class=&#34;token comment&#34;&gt;# 初始化本地配置文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule update &lt;span class=&#34;token comment&#34;&gt;# 从该项目中抓取所有数据并检出父项目中列出的合适的提交&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 有更简单一点的方式 如果给 git clone 命令传递 --recurse-submodules 选项&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 它就会自动初始化并更新仓库中的每一个子模块 包括可能存在的嵌套子模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-        <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
         <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
         <updated>2021-12-24T07:46:25.000Z</updated>
     </entry>
     <entry>
