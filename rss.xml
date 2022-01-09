@@ -18,10 +18,10 @@
             <title>数据结构与算法的开始</title>
             <link>https://blog.hongqing.online/structure-arith/ArithStart/</link>
             <category term="数据结构与算法" scheme="https://blog.hongqing.online/categories/structure-arith/" />
-            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
+            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <pubDate>Sat, 08 Jan 2022 18:28:25 +0800</pubDate>
-            <description><![CDATA[ &lt;div class=&#34;note info&#34;&gt;
+            <description><![CDATA[ &lt;div class=&#34;note primary&#34;&gt;
 &lt;p&gt;如无意外 数据结构与算法的学习过程&lt;br /&gt;
 主要是以 Java 语言为例子&lt;/p&gt;
 &lt;/div&gt;
@@ -29,30 +29,32 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;数据之间的关系&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;比如 游戏背包里物品数据的存储 都是上下垂直排布的 (线性关系)&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;比如 游戏背包里物品数据的存储 都是上下垂直排布的 (线性关系)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;如何将这个关系具体实现并存储到计算机中&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;用数组存更合理？&lt;br /&gt;
- 用链表存更合理？&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;用数组存更合理？&lt;/li&gt;
+&lt;li&gt;用链表存更合理？&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;基于关系之上对数据进行具体操作 (增删改查等等)&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;如何高效的在数组进行增删改查&lt;br /&gt;
-如何高效的在链表进行增删改查&lt;br /&gt;
-涉及到何种算法逻辑？&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;如何高效的在数组进行增删改查&lt;br /&gt;
+如何高效的在链表进行增删改查&lt;/li&gt;
+&lt;li&gt;涉及到何种算法逻辑？&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;数据结构的具体使用场景&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何使用创建了的数据结构&lt;/li&gt;
+&lt;li&gt;创建的数据结构更适用于哪些场合&lt;/li&gt;
+&lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如何使用创建了的数据结构&lt;br /&gt;
-创建的数据结构更适用于哪些场合&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;比如 &lt;code&gt;通讯录&lt;/code&gt; ：这种数据结构主要用于查&lt;/li&gt;
 &lt;li&gt;比如 &lt;code&gt;游戏背包里物品数据&lt;/code&gt; ：这种数据结构主要用于增删&lt;/li&gt;
@@ -110,7 +112,7 @@
 以保证数据之间的关系&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;对内存理由率高&lt;/li&gt;
+&lt;li&gt;对内存利用率高&lt;/li&gt;
 &lt;li&gt;内存空间不连续 不利于查找&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -150,65 +152,42 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;算法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#算法&#34;&gt;#&lt;/a&gt; 算法&lt;/h1&gt;
-&lt;blockquote&gt;
+&lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;解决特定问题的 &lt;code&gt;求解步骤&lt;/code&gt; 描述&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;/div&gt;
 &lt;h2 id=&#34;算法的时间复杂度&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#算法的时间复杂度&#34;&gt;#&lt;/a&gt; 算法的时间复杂度&lt;/h2&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在进行算法分析时 语句总的执行次数 T (n) 是关于问题规模 n 的函数&lt;br /&gt;
-进而分析 T (n) 随 n 的变化情况并确定 T (n) 的数量级&lt;br /&gt;
-算法的时间复杂度 也即是算法的时间度量&lt;br /&gt;
-记作: T (n)=O (f (n))&lt;br /&gt;
- 他表示随着问题 n 规模的增大 算法执行时间的增长率和 f (n) 的增长率相同&lt;br /&gt;
-其中 f (n) 是问题规模 n 的某个函数&lt;br /&gt;
- &lt;code&gt;算法的时间复杂度&lt;/code&gt; 主要探究的是问题输入规模 N 的数量级&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在进行算法分析时 语句总的执行次数 T (n) 是关于问题规模 n 的函数&lt;br /&gt;
+进而分析 T (n) 随 n 的变化情况并确定 T (n) 的数量级&lt;/li&gt;
+&lt;li&gt;算法的时间复杂度 也即是算法的时间度量&lt;br /&gt;
+记作: T (n)=O (f (n))&lt;/li&gt;
+&lt;li&gt;他表示随着问题 n 规模的增大 算法执行时间的增长率和 f (n) 的增长率相同&lt;br /&gt;
+其中 f (n) 是问题规模 n 的某个函数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;算法的时间复杂度&lt;/code&gt; 主要探究的是问题输入规模 N 的数量级&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;常数阶 O (1)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;就是那些 &lt;code&gt;无循环、无递归&lt;/code&gt;  与问题输入规模 N &lt;code&gt;无关的、逐行执行&lt;/code&gt; 的代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;线性阶 O (n)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;与问题输入规模有关的 主要是一层循环 多个一层循环可以并列 但是不可包含&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;线性阶 O (n+m)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;与线性阶 O (n) 一样 不过我们有两种数据的输入规模 分别为 &lt;code&gt;n&lt;/code&gt;  和 &lt;code&gt;m&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;平方阶 O (&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;n^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8141079999999999em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;与问题的输入规模有关的 主要是两层嵌套循环的代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;平方阶 O (nm)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;和平方阶 O (n^2) 一样 不过我们有两种数据的输入规模 分别为 &lt;code&gt;n&lt;/code&gt;  和 &lt;code&gt;m&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;对数阶 (&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;⁡&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\log n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8888799999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mop&#34;&gt;lo&lt;span style=&#34;margin-right:0.01389em;&#34;&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.16666666666666666em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;与问题输入规模有关的 主要是一层循环迭代或者递归代码&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;相关资料&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090834798.png&#34; alt=&#34;4&#34; height=&#34;300px&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;常见阶比较&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090835834.png&#34; alt=&#34;5&#34; height=&#34;300px&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;常数阶o1&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#常数阶o1&#34;&gt;#&lt;/a&gt; 常数阶 O (1)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;- 就是那些`无循环、无递归` 与问题输入规模N`无关的、逐行执行`的代码
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;线性阶on&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#线性阶on&#34;&gt;#&lt;/a&gt; 线性阶 O (n)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;- 与问题输入规模有关的 主要是一层循环 多个一层循环可以并列 但是不可包含
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;线性阶onm&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#线性阶onm&#34;&gt;#&lt;/a&gt; 线性阶 O (n+m)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;- 与线性阶O(n)一样 不过我们有两种数据的输入规模 分别为`n`和`m`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;平方阶on2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#平方阶on2&#34;&gt;#&lt;/a&gt; 平方阶 O (&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;msup&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/msup&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;n^2&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8141079999999999em;vertical-align:0em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord&#34;&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;msupsub&#34;&gt;&lt;span class=&#34;vlist-t&#34;&gt;&lt;span class=&#34;vlist-r&#34;&gt;&lt;span class=&#34;vlist&#34; style=&#34;height:0.8141079999999999em;&#34;&gt;&lt;span style=&#34;top:-3.063em;margin-right:0.05em;&#34;&gt;&lt;span class=&#34;pstrut&#34; style=&#34;height:2.7em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;sizing reset-size6 size3 mtight&#34;&gt;&lt;span class=&#34;mord mtight&#34;&gt;2&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;- 与问题的输入规模有关的 主要是两层嵌套循环的代码
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;平方阶onm&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#平方阶onm&#34;&gt;#&lt;/a&gt; 平方阶 O (nm)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;- 和平方阶O($n^2$)一样 不过我们有两种数据的输入规模 分别为`n`和`m`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;对数阶log-n&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对数阶log-n&#34;&gt;#&lt;/a&gt; 对数阶 (&lt;span class=&#34;katex&#34;&gt;&lt;span class=&#34;katex-mathml&#34;&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34;&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;⁡&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;annotation encoding=&#34;application/x-tex&#34;&gt;\log n&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class=&#34;katex-html&#34; aria-hidden=&#34;true&#34;&gt;&lt;span class=&#34;base&#34;&gt;&lt;span class=&#34;strut&#34; style=&#34;height:0.8888799999999999em;vertical-align:-0.19444em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mop&#34;&gt;lo&lt;span style=&#34;margin-right:0.01389em;&#34;&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;mspace&#34; style=&#34;margin-right:0.16666666666666666em;&#34;&gt;&lt;/span&gt;&lt;span class=&#34;mord mathnormal&#34;&gt;n&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;- 与问题输入规模有关的 主要是一层循环迭代或者递归代码
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;相关资料&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#相关资料&#34;&gt;#&lt;/a&gt; 相关资料&lt;/h3&gt;
+&lt;p class=&#34;gallery&#34;&gt;&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090834798.png&#34; alt=&#34;4&#34; /&gt;&lt;br /&gt;
+&lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090835834.png&#34; alt=&#34;5&#34; title=&#34;常见阶比较&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -563,8 +542,8 @@
             <title>Git学习笔记</title>
             <link>https://blog.hongqing.online/skills/GitStudy/</link>
             <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-            <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
             <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+            <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
             <pubDate>Fri, 24 Dec 2021 15:46:25 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;git的工作区和版本库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git的工作区和版本库&#34;&gt;#&lt;/a&gt; Git 的工作区和版本库&lt;/h1&gt;
 &lt;blockquote&gt;
