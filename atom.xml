@@ -37,12 +37,13 @@
 &lt;details&gt;&lt;summary&gt;举个栗子&lt;/summary&gt;&lt;div&gt;
 &lt;p&gt;小米官方提供的 Kernel 开源库&lt;br /&gt;
 其中由于未知原因 缺失 wlan 模块&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL01pQ29kZS9YaWFvbWlfS2VybmVsX09wZW5Tb3VyY2UvaXNzdWVzLzk4OCNpc3N1ZWNvbW1lbnQtNDQ2NDM0OTkx&#34;&gt; issues 传送门&lt;/span&gt;&lt;br /&gt;
 我在测试学习过程中&lt;br /&gt;
 编译了一个 &lt;code&gt;sagit-p-oss&lt;/code&gt;  内核&lt;br /&gt;
  (不同的机型对应不同的内核)&lt;br /&gt;
 (该内核专门对应小米 6)&lt;br /&gt;
  并且刷入了我的小米 6&lt;br /&gt;
-&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL01pQ29kZS9YaWFvbWlfS2VybmVsX09wZW5Tb3VyY2UvaXNzdWVzLzk4OCNpc3N1ZWNvbW1lbnQtNDQ2NDM0OTkx&#34;&gt; 结果由于内核模块缺失&lt;/span&gt;&lt;br /&gt;
+ 结果由于内核模块缺失&lt;br /&gt;
  Wi-Fi 驱动无法加载&lt;br /&gt;
 我的小米 6 丧失 Wi-Fi 功能&lt;/p&gt;
 &lt;/div&gt;&lt;/details&gt;
@@ -53,13 +54,13 @@
 那么说:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如何编译安卓内核 (Android Kernel)&lt;/li&gt;
-&lt;li&gt;如何编译内核驱动模块并且刷入&lt;br /&gt;
-便成为了本篇总结的介绍重点&lt;/li&gt;
+&lt;li&gt;如何编译内核驱动模块并且刷入&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;便成为了本篇总结的介绍重点&lt;/p&gt;
 &lt;h2 id=&#34;编译内核及模块过程中一些常用的shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编译内核及模块过程中一些常用的shell命令&#34;&gt;#&lt;/a&gt; 编译内核及模块过程中一些常用的 shell 命令&lt;/h2&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;查看内核模块信息&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;modinfo hello.ko&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;安装内核模块&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;insmod hello.ko&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;删除内核模块&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;rmmod hello.ko&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;查看内核消息&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;dmesg&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;搭建编译环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#搭建编译环境&#34;&gt;#&lt;/a&gt; 搭建编译环境&lt;/h1&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;查看内核模块信息&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;modinfo hello.ko &lt;span class=&#34;token comment&#34;&gt;# 查看内核模块信息&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;安装内核模块&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;insmod hello.ko &lt;span class=&#34;token comment&#34;&gt;# 安装内核模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;删除内核模块&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;rmmod hello.ko &lt;span class=&#34;token comment&#34;&gt;# 删除内核模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;查看内核消息&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;dmesg&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;# 查看内核消息&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;搭建编译环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#搭建编译环境&#34;&gt;#&lt;/a&gt; 搭建编译环境&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;本篇环境概述
 &lt;ul&gt;
@@ -84,35 +85,130 @@
 但是折腾了一整天&lt;br /&gt;
 就是编译不成功&lt;br /&gt;
 当时环境为 Ubuntu 20.4 LTS&lt;br /&gt;
- 在朋友的提点下 换用 18.04 LTS&lt;br /&gt;
+ 在团队的提点下 换用 18.04 LTS&lt;br /&gt;
  最终一次编译成功&lt;/p&gt;
 &lt;/div&gt;&lt;/details&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;下面我简单来说一下环境的配置步骤&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;下载系统依赖环境&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;下载系统依赖环境&lt;br /&gt;
+建议一次只安装一行环境&lt;br /&gt;
+这样哪次安装报错了可以及时排查&lt;br /&gt;
+不至于某个环境安装报错导致整个环境下载中断&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;下载系统依赖环境&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; ccache automake flex lzop bison&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; gperf build-essential &lt;span class=&#34;token function&#34;&gt;zip&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;curl&lt;/span&gt; zlib1g-dev zlib1g-dev:i386&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; g++-multilib python-networkx libxml2-utils &lt;span class=&#34;token function&#34;&gt;bzip2&lt;/span&gt; libbz2-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; schedtool dpkg-dev liblz4-tool &lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; optipng maven libssl-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; libxml-simple-perl &lt;span class=&#34;token function&#34;&gt;bc&lt;/span&gt; libc6-dev-i386 lib32ncurses5-dev&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;apt-get&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;install&lt;/span&gt; x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc &lt;span class=&#34;token function&#34;&gt;unzip&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;注：以上环境依赖已在 &lt;code&gt;Ubuntu 18.04 LTS&lt;/code&gt;  系统中测试&lt;br /&gt;
+全部安装正常&lt;/p&gt;
+&lt;/div&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;
 &lt;p&gt;设置交叉编译链工具&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;设置编译目标平台&lt;br /&gt;
 本文讨论的是安卓内核的编译&lt;br /&gt;
-就目前而言 大多数的安卓都是 aarch64 构架&lt;/p&gt;
+就目前而言 大多数的安卓都是 aarch64 构架&lt;br /&gt;
+因此 我们的目标编译平台就是 arm64&lt;br /&gt;
+ 如果不设置目标平台 将默认以当前系统的构架进行编译&lt;br /&gt;
+这显然不是我们本次想要的&lt;br /&gt;
+具体操作将在下面介绍&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;配置编译选项&lt;br /&gt;
 我&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装 ndk&lt;br /&gt;
+ 既然是 Android 的 native 层开发&lt;br /&gt;
+那不管三七二十一 先上他个 ndk&lt;br /&gt;
+ 不过这里注意咯:&lt;br /&gt;
+&lt;ins&gt; 千万千万不要给 ndk 配置环境变量&lt;/ins&gt;&lt;br /&gt;
+&lt;ins&gt;不然有可能会影响到交叉编译过程&lt;/ins&gt;&lt;br /&gt;
+&lt;ins&gt;同时 建议本文全部环境变量都不要写入环境配置文件&lt;/ins&gt;&lt;br /&gt;
+&lt;ins&gt;一律使用临时环境变量配置&lt;/ins&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;clone内核源码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#clone内核源码&#34;&gt;#&lt;/a&gt; clone 内核源码&lt;/h1&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone --depth&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b sagit-p-oss sagit-p-oss&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;如何刷入内核模块&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何刷入内核模块&#34;&gt;#&lt;/a&gt; 如何刷入内核模块&lt;/h1&gt;
+&lt;h1 id=&#34;编译内核源码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编译内核源码&#34;&gt;#&lt;/a&gt; 编译内核源码&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;单独克隆内核源码的对应分支&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;单独克隆内核源码的对应分支&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone --depth&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b sagit-p-oss sagit-p-oss&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;在源码目录创建输出内核编译输出目录&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;设置编译环境&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;建议环境变量使用临时配置&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64 &lt;span class=&#34;token comment&#34;&gt;# 设定交叉编译目标为 arm64&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ANDROID_AARCH64&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/toolchain/google_gcc-4.9/aarch64-linux-android-4.9/bin/ &lt;span class=&#34;token comment&#34;&gt;# 配置交叉编译连目录&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;&lt;span class=&#34;token environment constant&#34;&gt;PATH&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token environment constant&#34;&gt;$PATH&lt;/span&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;$ANDROID_AARCH64&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CROSS_COMPILE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;aarch64-linux-android-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;根据配置文件 生成编译脚本&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数必加!&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out sagit_user_defconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;div class=&#34;note danger&#34;&gt;
+&lt;p&gt;温馨提示一:&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意  &lt;code&gt;sagit_user_defconfig&lt;/code&gt;  为编译配置文件&lt;br /&gt;
+每个机型都不一样 请自行查看&lt;br /&gt;
+就单纯论小米系内核而言 配置文件已经在上文介绍&lt;br /&gt;
+这里不在赘述 其他内核应该大抵相似&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;note danger&#34;&gt;
+&lt;p&gt;温馨提示二:&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 make 过程中 我居然遇到了 &lt;code&gt;Permission denied&lt;/code&gt; &lt;br /&gt;
+ 开什么玩笑 我可是 root 用户执行的 make 哪来的权限问题&lt;br /&gt;
+稍做分析 得出结论：我的交叉编译链没有赋予执行权力&lt;br /&gt;
+于是 &lt;code&gt;chmod -R 777 (编译器路径)&lt;/code&gt;  直接把权限拉满&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;开始编译&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数指定编译好的内核产物输出目录&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;等待编译&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;等待编译的过程大概持续 20～30 分钟&lt;br /&gt;
+可以在 &lt;code&gt;开始编译&lt;/code&gt; 选择开启多线程编译&lt;br /&gt;
+具体命令自行查找 由于我是在远程服务器搭建的编译环境&lt;br /&gt;
+且服务器配置较为拉胯 就只开了单线程&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编译过程中 如果出现错误 编译过程则终止&lt;br /&gt;
+此时 请根据日志具体分析错误原因&lt;br /&gt;
+这里我根据自己摸索的经验结合 GitHub 上的 issues&lt;br /&gt;
+ 作出几点总结:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;操作系统是否正确&lt;br /&gt;
+前文吐槽中提到 操作系统不同&lt;br /&gt;
+是会导致编译失败的&lt;br /&gt;
+这里建议  &lt;code&gt;Ubuntu 18.04.6 LTS&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果是头文件错误&lt;br /&gt;
+根据 issues 表示&lt;br /&gt;
+应该在 make 的时候指定 &lt;code&gt;O=&lt;/code&gt;  参数&lt;br /&gt;
+ (我这里的命令已经指定了该参数)&lt;br /&gt;
+ 或者将头文件的 &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt;  改为 &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt; &lt;br /&gt;
+ 详情请见 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL01pQ29kZS9YaWFvbWlfS2VybmVsX09wZW5Tb3VyY2UvaXNzdWVzLzk1NyNpc3N1ZWNvbW1lbnQtNDQ1NzY5ODEz&#34;&gt;issues 传送门&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;如果是内核源码的语法错误&lt;br /&gt;
+理论上来说 能被开源的代码&lt;br /&gt;
+基本上是开发者已经编译成功过的代码&lt;br /&gt;
+排除极少数可能 应该语法上的错误不会存在&lt;br /&gt;
+如果报出语法错误 很有可能是&lt;br /&gt;
+&lt;strong&gt;你使用的编译器不正确&lt;/strong&gt;&lt;br /&gt;
+这种情况在我们团队合作的时候出现过&lt;br /&gt;
+不同的内核源码 应该视情况选择对应的编译器&lt;br /&gt;
+编译器的选择标准 上文已经介绍 这里不再赘述&lt;/li&gt;
+&lt;li&gt;极少数情况是源码真的错了&lt;br /&gt;
+这种情况建议看看 issues 或者向官方开发者联系&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;如何刷入内核模块&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何刷入内核模块&#34;&gt;#&lt;/a&gt; 如何刷入内核模块&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;刷入内核模块的思路大概分为两种&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;刷入自编译的内核与模块&lt;br /&gt;
-自己编译的内核&lt;br /&gt;
+自己编译的内核 你自然有他的 key&lt;br /&gt;
+ 有了 key 自然可以对模块进行正确的签名&lt;br /&gt;
 甚至你还可以在编译时 选择对应参数&lt;br /&gt;
 不开启内核校验 这样任何模块均可刷入&lt;/li&gt;
 &lt;li&gt;绕过内核签名校验和 crc 校验&lt;br /&gt;
@@ -132,7 +228,7 @@
 使用自己编译的内核产出的 key 对后续编译的动态模块进行签名&lt;br /&gt;
 这样 签名后的模块自然可以刷入到自己编译的对应内核中去&lt;br /&gt;
 由于博主没有在小米内核中找到对应的签名 key&lt;br /&gt;
-~~ 可能是我眼浊 没看到 但是我严重怀疑小米的 key 重命名了～～{.danger}&lt;br /&gt;
+～～可能是我眼浊 没看到 但是我严重怀疑小米的 key 重命名了～～{.danger}&lt;br /&gt;
  因此 这里不对这种方式多做说明 (未来有时间可能补上)&lt;/li&gt;
 &lt;li&gt;关闭校验&lt;br /&gt;
 将自己编译的内核关闭校验&lt;br /&gt;
@@ -142,15 +238,15 @@
  配置文件中有各项编译参数&lt;br /&gt;
 其中有如下三个参数是有关于内核签名的
 &lt;ul&gt;
-&lt;li&gt;CONFIG_MODULE_SIG:&lt;br /&gt;
+&lt;li&gt;&lt;code&gt;CONFIG_MODULE_SIG&lt;/code&gt; :&lt;br /&gt;
  模块签名验证功能 配置为 &amp;quot;y&amp;quot; 后 才有如下的子选项可以配置&lt;/li&gt;
-&lt;li&gt;CONFIG_MODULE_SIG_FORCE:&lt;br /&gt;
+&lt;li&gt;&lt;code&gt;CONFIG_MODULE_SIG_FORCE&lt;/code&gt; :&lt;br /&gt;
  是否验证模块的签名&lt;br /&gt;
 配置为 &amp;quot;n&amp;quot; 时 对于未签名或者使用无效的 key 签名的模块 内核都允许加载&lt;br /&gt;
 但是 kernel 会被标记为被感染 (tainted) 并且使用商业许可的模块也会被标记为被感染&lt;br /&gt;
 若配置为‘y’ 则只有正确签名的模块才能被允许加载&lt;br /&gt;
 其他的模块将被拒绝加载 并且 kernel 会打出错误信息&lt;/li&gt;
-&lt;li&gt;CONFIG_MODULE_SIG_ALL:&lt;br /&gt;
+&lt;li&gt;&lt;code&gt;CONFIG_MODULE_SIG_ALL&lt;/code&gt; :&lt;br /&gt;
  若配置为 &amp;quot;n&amp;quot; 则在 build kernel 的过程中&lt;br /&gt;
 所有的模块都不会被签名 需要自己手动签名&lt;br /&gt;
 若被配置为 &amp;quot;y&amp;quot; 则在 build kernel 的 &amp;quot;modules_install&amp;quot; 阶段&lt;br /&gt;
@@ -173,8 +269,7 @@
 &lt;li&gt;在本机提取 (需要 root)&lt;br /&gt;
  第一种方式解压线刷包即可获取&lt;br /&gt;
 第二种方式在 adb 连接上设备以后&lt;br /&gt;
-进入 su 环境&lt;br /&gt;
-输入命令如下:&lt;/li&gt;
+进入 su 环境 输入命令如下:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;提取boot.im到/sdcard目录下&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;dd&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;readlink /dev/block/by-name/boot&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;of&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/sdcard/boot.img&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
 &lt;li&gt;
@@ -194,8 +289,9 @@
 &lt;p&gt;研究中... 未完待续&lt;/p&gt;
 </content>
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
+        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <category term="Kernel" scheme="https://blog.hongqing.online/tags/Kernel/" />
         <updated>2022-01-17T06:55:25.000Z</updated>
     </entry>
     <entry>
@@ -780,8 +876,8 @@
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;url&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; path/path&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# url 是指向的仓库地址 path/path 指向子模块目录&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 例如: git submodule add https://github.com/SsageParuders/hexo-theme-shoka themes/shoka&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 使用这个命令 取消子模块关联: git rm --cached themes/shoka&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 新出现的 .gitmodules 文件 是子模块的配置文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;克隆含有子模块的项目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#克隆含有子模块的项目&#34;&gt;#&lt;/a&gt; 克隆含有子模块的项目&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 当你在克隆这样的项目时 默认会包含该子模块目录 但其中还没有任何文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 你必须运行两个命令:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule init &lt;span class=&#34;token comment&#34;&gt;# 初始化本地配置文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule update &lt;span class=&#34;token comment&#34;&gt;# 从该项目中抓取所有数据并检出父项目中列出的合适的提交&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 有更简单一点的方式 如果给 git clone 命令传递 --recurse-submodules 选项&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 它就会自动初始化并更新仓库中的每一个子模块 包括可能存在的嵌套子模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-        <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
         <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
         <updated>2021-12-24T07:46:25.000Z</updated>
     </entry>
     <entry>
