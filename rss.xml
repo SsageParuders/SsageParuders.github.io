@@ -10,16 +10,204 @@
         </author>
         <description>静坐常思己过 闲谈莫论人非</description>
         <language>zh-CN</language>
-        <pubDate>Sat, 08 Jan 2022 18:28:25 +0800</pubDate>
-        <lastBuildDate>Sat, 08 Jan 2022 18:28:25 +0800</lastBuildDate>
+        <pubDate>Mon, 17 Jan 2022 14:55:25 +0800</pubDate>
+        <lastBuildDate>Mon, 17 Jan 2022 14:55:25 +0800</lastBuildDate>
         <category term="SsageParuders" />
+        <item>
+            <guid isPermalink="true">https://blog.hongqing.online/android/BuildAndroidKernel/</guid>
+            <title>【Android Kernel】编译总结</title>
+            <link>https://blog.hongqing.online/android/BuildAndroidKernel/</link>
+            <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
+            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+            <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
+            <pubDate>Mon, 17 Jan 2022 14:55:25 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最近因为项目上的一些需求&lt;br /&gt;
+开始着手研究安卓内核&lt;br /&gt;
+踩了不少的坑 也浪费了不少时间&lt;br /&gt;
+所以打算写下这篇总结&lt;br /&gt;
+希望能给后来的人提供一些帮助&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;安卓内核介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安卓内核介绍&#34;&gt;#&lt;/a&gt; 安卓内核介绍&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;真要详细且专业的讲讲安卓内核 &amp;amp; Linux 内核&lt;br /&gt;
+鄙人自愧 才疏学浅 不敢献丑&lt;br /&gt;
+但要是说普及一些基础概念 还是想唠上两句&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安卓是 Linux 的嵌入式发展&lt;br /&gt;
+也就是说 安卓系统中包含了一个 Linux 的内核 (Kernel)&lt;br /&gt;
+ 平时我们使用的 蓝牙 Wi-Fi 等等功能&lt;br /&gt;
+无不依赖于 Kernel 中驱动提供的支持&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;举个栗子&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;小米官方提供的 Kernel 开源库&lt;br /&gt;
+其中由于未知原因 缺失 wlan 模块&lt;br /&gt;
+我在测试学习过程中&lt;br /&gt;
+编译了一个 &lt;code&gt;sagit-p-oss&lt;/code&gt;  内核&lt;br /&gt;
+ (不同的机型对应不同的内核)&lt;br /&gt;
+(该内核专门对应小米 6)&lt;br /&gt;
+ 并且刷入了我的小米 6&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL01pQ29kZS9YaWFvbWlfS2VybmVsX09wZW5Tb3VyY2UvaXNzdWVzLzk4OCNpc3N1ZWNvbW1lbnQtNDQ2NDM0OTkx&#34;&gt; 结果由于内核模块缺失&lt;/span&gt;&lt;br /&gt;
+ Wi-Fi 驱动无法加载&lt;br /&gt;
+我的小米 6 丧失 Wi-Fi 功能&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;也就是说 安卓内核中提供的诸多模块驱动&lt;br /&gt;
+对整个安卓系统有较为重要的影响&lt;br /&gt;
+那么说:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如何编译安卓内核 (Android Kernel)&lt;/li&gt;
+&lt;li&gt;如何编译内核驱动模块并且刷入&lt;br /&gt;
+便成为了本篇总结的介绍重点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;编译内核及模块过程中一些常用的shell命令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编译内核及模块过程中一些常用的shell命令&#34;&gt;#&lt;/a&gt; 编译内核及模块过程中一些常用的 shell 命令&lt;/h2&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;查看内核模块信息&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;modinfo hello.ko&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;安装内核模块&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;insmod hello.ko&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;删除内核模块&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;rmmod hello.ko&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;查看内核消息&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;dmesg&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;搭建编译环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#搭建编译环境&#34;&gt;#&lt;/a&gt; 搭建编译环境&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;本篇环境概述
+&lt;ul&gt;
+&lt;li&gt;机型 &amp;amp; 系统: Mi 6 &amp;amp; Android P&lt;/li&gt;
+&lt;li&gt;内核源码: &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL01pQ29kZS9YaWFvbWlfS2VybmVsX09wZW5Tb3VyY2UvdHJlZS9zYWdpdC1wLW9zcw==&#34;&gt;Xiaomi_Kernel_OpenSource-sagit-p-oss&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;开发环境:  Ubuntu 18.04.6 LTS&lt;/li&gt;
+&lt;li&gt;交叉编译链: gcc 4.9.x 20150123 prerelease&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;note info&#34;&gt;
+&lt;p&gt;特别说明&lt;/p&gt;
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;可别小看环境搭建这个步骤&lt;br /&gt;
+不同的内核 编译所需要的环境各不相同&lt;br /&gt;
+环境一点点微小的差异&lt;br /&gt;
+很可能导致整个编译流程的失败&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;举个栗子&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;我最初编译米 6 内核的步骤理论上绝对正确&lt;br /&gt;
+不存在操作失误&lt;br /&gt;
+但是折腾了一整天&lt;br /&gt;
+就是编译不成功&lt;br /&gt;
+当时环境为 Ubuntu 20.4 LTS&lt;br /&gt;
+ 在朋友的提点下 换用 18.04 LTS&lt;br /&gt;
+ 最终一次编译成功&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下面我简单来说一下环境的配置步骤&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;下载系统依赖环境&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置交叉编译链工具&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置编译目标平台&lt;br /&gt;
+本文讨论的是安卓内核的编译&lt;br /&gt;
+就目前而言 大多数的安卓都是 aarch64 构架&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置编译选项&lt;br /&gt;
+我&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;clone内核源码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#clone内核源码&#34;&gt;#&lt;/a&gt; clone 内核源码&lt;/h1&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone --depth&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b sagit-p-oss sagit-p-oss&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;如何刷入内核模块&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何刷入内核模块&#34;&gt;#&lt;/a&gt; 如何刷入内核模块&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;刷入内核模块的思路大概分为两种&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;刷入自编译的内核与模块&lt;br /&gt;
+自己编译的内核&lt;br /&gt;
+甚至你还可以在编译时 选择对应参数&lt;br /&gt;
+不开启内核校验 这样任何模块均可刷入&lt;/li&gt;
+&lt;li&gt;绕过内核签名校验和 crc 校验&lt;br /&gt;
+利用 Kernel 的漏洞 绕过内核的校验&lt;br /&gt;
+实现该方案的途径并不唯一 有很多漏洞 / 骚操作可以利用&lt;br /&gt;
+但是无论如何 使用该方案需要更高的技术要求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;下面 我来分别简介两种方案&lt;/p&gt;
+&lt;h2 id=&#34;替换自编译的安卓内核&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#替换自编译的安卓内核&#34;&gt;#&lt;/a&gt; 替换自编译的安卓内核&lt;/h2&gt;
+&lt;p&gt;如果你选择了替换内核的方式刷入内核模块&lt;br /&gt;
+那么 你有两条方式可以选择&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对模块签名&lt;br /&gt;
+即使是各项环境相同 每次编译内核产生的 key 都是不一样的&lt;br /&gt;
+使用 key 对模块进行签名 如此也保证了内核安全&lt;br /&gt;
+使用自己编译的内核产出的 key 对后续编译的动态模块进行签名&lt;br /&gt;
+这样 签名后的模块自然可以刷入到自己编译的对应内核中去&lt;br /&gt;
+由于博主没有在小米内核中找到对应的签名 key&lt;br /&gt;
+~~ 可能是我眼浊 没看到 但是我严重怀疑小米的 key 重命名了～～{.danger}&lt;br /&gt;
+ 因此 这里不对这种方式多做说明 (未来有时间可能补上)&lt;/li&gt;
+&lt;li&gt;关闭校验&lt;br /&gt;
+将自己编译的内核关闭校验&lt;br /&gt;
+在对内核源码进行 make 时&lt;br /&gt;
+一般都会指定配置文件&lt;br /&gt;
+比如小米 6 在 make 的时候 配置文件就是 &lt;code&gt;sagit_user_defconfig&lt;/code&gt; &lt;br /&gt;
+ 配置文件中有各项编译参数&lt;br /&gt;
+其中有如下三个参数是有关于内核签名的
+&lt;ul&gt;
+&lt;li&gt;CONFIG_MODULE_SIG:&lt;br /&gt;
+ 模块签名验证功能 配置为 &amp;quot;y&amp;quot; 后 才有如下的子选项可以配置&lt;/li&gt;
+&lt;li&gt;CONFIG_MODULE_SIG_FORCE:&lt;br /&gt;
+ 是否验证模块的签名&lt;br /&gt;
+配置为 &amp;quot;n&amp;quot; 时 对于未签名或者使用无效的 key 签名的模块 内核都允许加载&lt;br /&gt;
+但是 kernel 会被标记为被感染 (tainted) 并且使用商业许可的模块也会被标记为被感染&lt;br /&gt;
+若配置为‘y’ 则只有正确签名的模块才能被允许加载&lt;br /&gt;
+其他的模块将被拒绝加载 并且 kernel 会打出错误信息&lt;/li&gt;
+&lt;li&gt;CONFIG_MODULE_SIG_ALL:&lt;br /&gt;
+ 若配置为 &amp;quot;n&amp;quot; 则在 build kernel 的过程中&lt;br /&gt;
+所有的模块都不会被签名 需要自己手动签名&lt;br /&gt;
+若被配置为 &amp;quot;y&amp;quot; 则在 build kernel 的 &amp;quot;modules_install&amp;quot; 阶段&lt;br /&gt;
+所有的模块都会被自动签名&lt;br /&gt;
+如上所述 只需要在 make 前 将配置文件中的&lt;br /&gt;
+ &lt;code&gt;CONFIG_MODULE_SIG_FORCE&lt;/code&gt;  参数改为 “n”&lt;br /&gt;
+ 制作出来的内核即可刷入任意模块 不过会被标记&lt;br /&gt;
+因此 较为适合开发环境 不适合发行环境&lt;br /&gt;
+对我们开发者来说 这项参数为 &amp;quot;n&amp;quot; 即可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;替换安卓内核大概分如下步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#替换安卓内核大概分如下步骤&#34;&gt;#&lt;/a&gt; 替换安卓内核大概分如下步骤&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;提取当前 &lt;code&gt;boot.img&lt;/code&gt; &lt;br /&gt;
+ 提取对应 &lt;code&gt;boot.img&lt;/code&gt;  有两种方式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;去你手机当前系统的 Rom 对应的线刷包提取 &lt;code&gt;boot.img&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在本机提取 (需要 root)&lt;br /&gt;
+ 第一种方式解压线刷包即可获取&lt;br /&gt;
+第二种方式在 adb 连接上设备以后&lt;br /&gt;
+进入 su 环境&lt;br /&gt;
+输入命令如下:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;提取boot.im到/sdcard目录下&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;dd&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;readlink /dev/block/by-name/boot&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;of&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/sdcard/boot.img&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解压 &lt;code&gt;boot.img&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将内核替换为我们自己编译的&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新打包出 &lt;code&gt;boot.img&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fastboot 刷入 &lt;code&gt;boot.img&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;重启手机到fastboot模式&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;adb &lt;span class=&#34;token function&#34;&gt;reboot&lt;/span&gt; bootloader&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;刷入替换内核后的boot.img&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;fastboot flash boot bot.img&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;在fastboot模式下的重启命令&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;fastboot &lt;span class=&#34;token function&#34;&gt;reboot&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;跳过原有内核签名校验&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#跳过原有内核签名校验&#34;&gt;#&lt;/a&gt; 跳过原有内核签名校验&lt;/h2&gt;
+&lt;p&gt;研究中... 未完待续&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://blog.hongqing.online/structure-arith/ArithStart/</guid>
             <title>数据结构与算法的开始</title>
             <link>https://blog.hongqing.online/structure-arith/ArithStart/</link>
             <category term="数据结构与算法" scheme="https://blog.hongqing.online/categories/structure-arith/" />
-            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
+            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <pubDate>Sat, 08 Jan 2022 18:28:25 +0800</pubDate>
             <description><![CDATA[ &lt;div class=&#34;note primary&#34;&gt;
 &lt;p&gt;如无意外 数据结构与算法的学习过程&lt;br /&gt;
@@ -228,8 +416,8 @@
 &lt;/ul&gt;
 &lt;h1 id=&#34;使用cmake体系构建第一个程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用cmake体系构建第一个程序&#34;&gt;#&lt;/a&gt; 使用 CMake 体系构建第一个程序&lt;/h1&gt;
 &lt;p&gt;第一个程序 那必然是我们的 HelloWorld&lt;br /&gt;
- 创建 main.cpp :&lt;/p&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;vim&lt;/span&gt; main.cpp&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;cmake工具的命令行参数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmake工具的命令行参数&#34;&gt;#&lt;/a&gt; CMake 工具的命令行参数&lt;/h1&gt;
+ 创建 main.cpp :  &lt;code&gt;vim main.cpp&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight cpp&#34;&gt;&lt;figcaption data-lang=&#34;C++&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token macro property&#34;&gt;&lt;span class=&#34;token directive-hash&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;token directive keyword&#34;&gt;include&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&amp;lt;iostream&gt;&lt;/span&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;token function&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;Hello World&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token keyword&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;cmake工具的命令行参数&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmake工具的命令行参数&#34;&gt;#&lt;/a&gt; CMake 工具的命令行参数&lt;/h1&gt;
 &lt;h1 id=&#34;cmakelisttxt介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmakelisttxt介绍&#34;&gt;#&lt;/a&gt;  &lt;code&gt;CMakeList.txt&lt;/code&gt;  介绍&lt;/h1&gt;
 &lt;h1 id=&#34;cmakegui介绍和使用&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cmakegui介绍和使用&#34;&gt;#&lt;/a&gt; CMakeGui 介绍和使用&lt;/h1&gt;
 &lt;p&gt;其实吧 CMake 这个工具&lt;br /&gt;
@@ -429,7 +617,7 @@
 你会发现 riru-il2cppdumper 出来的 dump.cs 的内存会比较小&lt;/p&gt;
 &lt;details&gt;&lt;summary&gt;缺陷(此时项目版本@90a8fb3)&lt;/summary&gt;&lt;div&gt;
 &lt;ul class=&#34;task-list&#34;&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; 娱乐低版本使用反射进行 dump&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; 低版本使用反射进行 dump&lt;/label&gt;&lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 高版本使用 il2cpp_image_get_class 进行 dump&lt;/label&gt;&lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; 完善 dump.cs 输出&lt;/label&gt;&lt;/li&gt;
 &lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_3&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_3&#34;&gt; 泛型相关输出&lt;/label&gt;&lt;/li&gt;
@@ -533,8 +721,8 @@
             <title>Git学习笔记</title>
             <link>https://blog.hongqing.online/skills/GitStudy/</link>
             <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-            <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
             <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+            <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
             <pubDate>Fri, 24 Dec 2021 15:46:25 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;git的工作区和版本库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git的工作区和版本库&#34;&gt;#&lt;/a&gt; Git 的工作区和版本库&lt;/h1&gt;
 &lt;blockquote&gt;
@@ -628,7 +816,7 @@
 但是采用这样的方式 会有如下缺陷&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;SuperSU 貌似停止更新 因此 SuperSU 获取 root 的方式只停留在安卓 9.0 以下&lt;/li&gt;
-&lt;li&gt;貌似依然无法突破 Google play 的限制 且 abi 只能创建 x86 构架&lt;/li&gt;
+&lt;li&gt;貌似依然无法突破 Google play 的限制&lt;/li&gt;
 &lt;li&gt;由于博主不想尝试这种过时的方法 因此暂未实践 这里也不再赘述 想要查阅相关资料的可以自行搜索&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;emulator刷入magisk获取root&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#emulator刷入magisk获取root&#34;&gt;#&lt;/a&gt; Emulator 刷入 Magisk 获取 root&lt;/h1&gt;
