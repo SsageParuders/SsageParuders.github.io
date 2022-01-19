@@ -16,11 +16,9 @@
         <link rel="alternate" href="https://blog.hongqing.online/android/BuildAndroidKernel/"/>
         <content type="html">&lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;最近因为项目上的一些需求&lt;br /&gt;
-开始着手研究安卓内核&lt;br /&gt;
+&lt;p&gt;最近因为项目上的一些需求 开始着手研究安卓内核&lt;br /&gt;
 踩了不少的坑 也浪费了不少时间&lt;br /&gt;
-所以打算写下这篇总结&lt;br /&gt;
-希望能给后来的人提供一些帮助&lt;/p&gt;
+所以打算写下这篇总结 希望能给后来的人提供一些帮助&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1 id=&#34;安卓内核介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安卓内核介绍&#34;&gt;#&lt;/a&gt; 安卓内核介绍&lt;/h1&gt;
 &lt;ul&gt;
@@ -104,39 +102,88 @@
 使用的编译器有可能完全不一样&lt;/p&gt;
 &lt;details&gt;&lt;summary&gt;举个栗子&lt;/summary&gt;&lt;div&gt;
 &lt;pre&gt;&lt;code&gt;本次实验的是小米6
-小米6的内核使用的是`Google gcc 4.9`
-但在我想要单纯的使用`Google gcc 4.9`
+小米6的内核使用的是 Google gcc 4.9
+但在我想要单纯的使用 Google gcc 4.9
 继续编译某份安卓11内核源码时
 接连出现语法报错 并且编译终止
 最后查了一下资料 换用clang/llvm继续编译
-最终编译成功
+最终编译成功 由此可见 编译器的选择相当重要
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;/details&gt;
 &lt;p&gt;那么如何查看自己的手机内核应该使用哪种编译器呢？&lt;br /&gt;
  最简单的方式 在 su 环境下 adb 输入如下命令:&lt;/p&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /proc/version&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;该命令会输出你手机当前内核的内核基本信息&lt;br /&gt;
-其中自然包含当前内核由什么编译器编译而成&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /proc/version&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;Linux version &lt;span class=&#34;token number&#34;&gt;4.19&lt;/span&gt;.113-perf-g62242b28117e &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;builder@c5-xm-ota-bd015.bj&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;clang version &lt;span class=&#34;token number&#34;&gt;10.0&lt;/span&gt;.6 &lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; Android NDK&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;token comment&#34;&gt;#1 SMP PREEMPT Mon Aug 30 23:02:37 CST 2021&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;该命令会输出你手机当前内核的基本信息&lt;br /&gt;
+其中自然包含当前内核由什么编译器编译而成&lt;br /&gt;
+比如上面的输出信息 &lt;code&gt;clang version 10.0.6 for Android NDK&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt;  那么你应该使用&lt;/li&gt;
-&lt;li&gt;如果是 &lt;code&gt;clang x.x.x for Android ndk&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt; &lt;br /&gt;
+ 那么你应该使用&lt;/li&gt;
+&lt;li&gt;如果是 &lt;code&gt;clang version x.x.x for Android NDK&lt;/code&gt; &lt;br /&gt;
+ 那么你应该使用的是由高通发布的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt; &lt;br /&gt;
+ 最后 简单讲讲我查到的内核交叉编译链的相关资料&lt;/li&gt;
 &lt;/ul&gt;
+&lt;details&gt;&lt;summary&gt;相关资料&lt;/summary&gt;&lt;div&gt;
+&lt;pre&gt;&lt;code&gt;据传ndk里面的交叉编译链也能编译部分很老的内核?
+Google gcc:[【传送门】](https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/)
+
+Google clang:[【传送门】](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/master)
+这个是谷歌源码树里面的clang 据说是能用来编译内核的 具体我没测试 毕竟我使用的是高通提供的clang/llvm 有兴趣的朋友可以试试这个
+Snapdragon LLVM Compiler for Android:[【传送门】](https://developer.qualcomm.com/software/snapdragon-llvm-compiler-android/tools)
+顺便一提 从高通开发者平台下载工具需要注册账号并登录 不然你点半天也不下载 别问我怎么知道的
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/details&gt;
 &lt;h2 id=&#34;设置编译目标平台&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译目标平台&#34;&gt;#&lt;/a&gt; 设置编译目标平台&lt;/h2&gt;
 &lt;p&gt;本文讨论的是安卓内核的编译&lt;br /&gt;
 就目前而言 大多数的安卓都是 aarch64 构架&lt;br /&gt;
 因此 我们的目标编译平台就是 arm64&lt;br /&gt;
  配置编译目标平台 应在源码目录输入如下命令:&lt;/p&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;如果不设置目标平台 将默认以当前系统的构架进行编译&lt;br /&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;设定交叉编译目标为arm64&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;如果不设置目标平台 将默认以当前系统的构架进行编译&lt;br /&gt;
 这显然不是我们本次想要的&lt;/p&gt;
 &lt;h2 id=&#34;设置编译配置文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译配置文件&#34;&gt;#&lt;/a&gt; 设置编译配置文件&lt;/h2&gt;
-&lt;p&gt;在第一次 make 生成编译脚本的时候&lt;br /&gt;
-需要填写编译配置文件&lt;br /&gt;
-就单纯论小米内核而言&lt;br /&gt;
-他的配置文件在&lt;br /&gt;
- &lt;code&gt;源码目录/arm64/configs/&lt;/code&gt;  目录下&lt;br /&gt;
+&lt;p&gt;在第一次 make 生成编译脚本的时候 需要填写编译配置文件&lt;br /&gt;
+就单纯论小米内核而言 他的配置文件在&lt;br /&gt;
+ &lt;code&gt;源码目录/arch/arm64/configs/&lt;/code&gt;  目录下&lt;br /&gt;
 该目录下存在着该内核 arm64 架构情况下的各机型编译配置&lt;br /&gt;
 我们一般情况下 设置 &lt;code&gt;sagit_user_defconfig&lt;/code&gt;  即可&lt;br /&gt;
 在生成编译脚本时 其中的设置会影响编译情况&lt;/p&gt;
-&lt;h2 id=&#34;确认dtcdtbo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#确认dtcdtbo&#34;&gt;#&lt;/a&gt; 确认 dtc/dtbo&lt;/h2&gt;
+&lt;h2 id=&#34;了解dtbdtbo&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#了解dtbdtbo&#34;&gt;#&lt;/a&gt; 了解 dtb/dtbo&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;什么是 dt&lt;br /&gt;
+dt 是 &lt;code&gt;kernel device tree&lt;/code&gt;  的简称&lt;br /&gt;
+说白了 dt 就是一堆设备特有的配置文件 它们的出现是为了使内核代码树变得干净一些&lt;br /&gt;
+ (只留下适用于所有设备的部分，而将设备之间有区别的部分转移至 dt)&lt;br /&gt;
+ dt 在高通平台内核中的位置：
+&lt;ul&gt;
+&lt;li&gt;msm-3.18/msm-4.4 -&amp;gt; arch/arm/boot/dts/qcom&lt;/li&gt;
+&lt;li&gt;msm-4.9/msm-4.14 -&amp;gt; arch/arm64/boot/dts/qcom&lt;/li&gt;
+&lt;li&gt;msm-4.19 -&amp;gt; 不在内核树中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;什么是 dtc&lt;br /&gt;
+ 设备树 &lt;code&gt;kernel device tree&lt;/code&gt;  的编译器是 dtc&lt;/li&gt;
+&lt;li&gt;什么是 dtb&lt;br /&gt;
+dtb 是 &lt;code&gt;device tree binary&lt;/code&gt;  的简称&lt;br /&gt;
+它们在开机启动在早期阶段由 bootloader 解码 传递给内核 从而帮助内核完成启动过程&lt;/li&gt;
+&lt;li&gt;什么是 dtbo&lt;br /&gt;
+dtbo 是 &lt;code&gt;device tree binary overlay&lt;/code&gt;  的简称&lt;br /&gt;
+在 msm-4.9 平台上 dtbo 横空出世 (准确来说是出厂搭载安卓 9 的要求)&lt;br /&gt;
+ device tree 被拆分到了两个地方 一个是 boot 分区中的老位置 另一个则是 dtbo 分区&lt;br /&gt;
+谷歌做这件事的初衷在于：希望分离芯片厂商和手机厂商的修改&lt;br /&gt;
+芯片厂商只修改内核中的 dtb 而手机厂商只修改 dtbo 分区 这样能够井井有条&lt;/li&gt;
+&lt;li&gt;dtb 和 dtbo 的区别
+&lt;ul&gt;
+&lt;li&gt;dtb 中装有芯片级配置 比如 gpu 频率表&lt;br /&gt;
+这就是为什么 gpu 超频卡刷包里面是个 dtb 文件的原因 (用来替换 kernel dtb)&lt;/li&gt;
+&lt;li&gt;dtbo 中装有厂商级的配置&lt;br /&gt;
+比如屏幕 相机等 这就是为什么超刷新率改的是 dtbo 分区&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;那么问题来了 如何判断自己的机型编译的内核是否需要包含 dtbo 呢&lt;br /&gt;
+我个人的做法是 在编译配置文件中 查找是否包含参数 &lt;code&gt;CONFIG_BUILD_ARM64_DT_OVERLAY&lt;/code&gt; &lt;br /&gt;
+ 如果包含该参数 则编译的内核需要使用 dtbo 将该参数修改为 &amp;quot;y&amp;quot; 此时 配置环境变量:&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;编译包含dtbo的内核 因此需要dtc&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;DTC_EXT&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;dtc&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;ins&gt;注:dtc must be from aosp source code (pie-release)&lt;/ins&gt;&lt;br /&gt;
+&lt;ins&gt; 另外 根据我个人对 dtbo 的理解 貌似我这种判断方法并不妥当&lt;/ins&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装ndk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装ndk&#34;&gt;#&lt;/a&gt; 安装 ndk&lt;/h2&gt;
 &lt;p&gt;既然是 Android 的 native 层开发&lt;br /&gt;
 那不管三七二十一 先上他个 ndk&lt;/p&gt;
@@ -270,15 +317,11 @@
 因此 较为适合开发环境 不适合发行环境&lt;br /&gt;
 对我们开发者来说 这项参数为 &amp;quot;n&amp;quot; 即可&lt;/p&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;一些补充&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;注意，Makefile 中要加上 CFLAGS_MODULE=-fno-pic 选项，不然编译好的 模块 relocation 节会错误&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;insmod: init_module &lt;span class=&#34;token string&#34;&gt;&#39;hello.ko&#39;&lt;/span&gt; failed &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Exec &lt;span class=&#34;token function&#34;&gt;format&lt;/span&gt; error&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;替换安卓内核大概分如下步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#替换安卓内核大概分如下步骤&#34;&gt;#&lt;/a&gt; 替换安卓内核大概分如下步骤&lt;/h3&gt;
+&lt;h3 id=&#34;一些补充&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一些补充&#34;&gt;#&lt;/a&gt; 一些补充&lt;/h3&gt;
+&lt;p&gt;注意 Makefile 中要加上 &lt;code&gt;CFLAGS_MODULE=-fno-pic&lt;/code&gt;  选项&lt;br /&gt;
+不然编译好的模块 relocation 节会错误 如下&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;insmod: init_module &lt;span class=&#34;token string&#34;&gt;&#39;hello.ko&#39;&lt;/span&gt; failed &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Exec &lt;span class=&#34;token function&#34;&gt;format&lt;/span&gt; error&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;替换安卓内核大概分如下步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#替换安卓内核大概分如下步骤&#34;&gt;#&lt;/a&gt; 替换安卓内核大概分如下步骤&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;提取当前 &lt;code&gt;boot.img&lt;/code&gt; &lt;br /&gt;
