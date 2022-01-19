@@ -101,21 +101,32 @@
 &lt;h2 id=&#34;设置交叉编译链工具&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置交叉编译链工具&#34;&gt;#&lt;/a&gt; 设置交叉编译链工具&lt;/h2&gt;
 &lt;p&gt;&lt;ins&gt;&lt;strong&gt;这一步至关重要&lt;/strong&gt;&lt;/ins&gt;&lt;br /&gt;
 不同的内核 由于各方面因素影响&lt;br /&gt;
-使用的编译器有可能完全不一样&lt;br /&gt;
- +++ 举个栗子&lt;br /&gt;
-本次实验的是小米 6&lt;br /&gt;
- 小米 6 的内核使用的是 Google gcc 4.9&lt;br /&gt;
- 一开始我们没有&lt;br /&gt;
- +++&lt;br /&gt;
- 那么如何查看自己的手机内核应该使用哪种编译器呢？&lt;br /&gt;
- 最简单的方式&lt;/p&gt;
+使用的编译器有可能完全不一样&lt;/p&gt;
+&lt;details&gt;&lt;summary&gt;举个栗子&lt;/summary&gt;&lt;div&gt;
+&lt;pre&gt;&lt;code&gt;本次实验的是小米6
+小米6的内核使用的是`Google gcc 4.9`
+但在我想要单纯的使用`Google gcc 4.9`
+继续编译某份安卓11内核源码时
+接连出现语法报错 并且编译终止
+最后查了一下资料 换用clang/llvm继续编译
+最终编译成功
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;那么如何查看自己的手机内核应该使用哪种编译器呢？&lt;br /&gt;
+ 最简单的方式 在 su 环境下 adb 输入如下命令:&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;cat&lt;/span&gt; /proc/version&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;该命令会输出你手机当前内核的内核基本信息&lt;br /&gt;
+其中自然包含当前内核由什么编译器编译而成&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt;  那么你应该使用&lt;/li&gt;
+&lt;li&gt;如果是 &lt;code&gt;clang x.x.x for Android ndk&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;设置编译目标平台&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译目标平台&#34;&gt;#&lt;/a&gt; 设置编译目标平台&lt;/h2&gt;
 &lt;p&gt;本文讨论的是安卓内核的编译&lt;br /&gt;
 就目前而言 大多数的安卓都是 aarch64 构架&lt;br /&gt;
 因此 我们的目标编译平台就是 arm64&lt;br /&gt;
- 如果不设置目标平台 将默认以当前系统的构架进行编译&lt;br /&gt;
-这显然不是我们本次想要的&lt;br /&gt;
-具体操作将在下面介绍&lt;/p&gt;
+ 配置编译目标平台 应在源码目录输入如下命令:&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;如果不设置目标平台 将默认以当前系统的构架进行编译&lt;br /&gt;
+这显然不是我们本次想要的&lt;/p&gt;
 &lt;h2 id=&#34;设置编译配置文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译配置文件&#34;&gt;#&lt;/a&gt; 设置编译配置文件&lt;/h2&gt;
 &lt;p&gt;在第一次 make 生成编译脚本的时候&lt;br /&gt;
 需要填写编译配置文件&lt;br /&gt;
@@ -237,17 +248,17 @@
 比如小米 6 在 make 的时候 配置文件就是 &lt;code&gt;sagit_user_defconfig&lt;/code&gt; &lt;br /&gt;
  配置文件中有各项编译参数&lt;br /&gt;
 其中有如下三个参数是有关于内核签名的&lt;/p&gt;
-&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;`CONFIG_MODULE_SIG`&#34;&gt;
-&lt;p&gt;模块签名验证功能 配置为 &amp;quot;y&amp;quot; 后 才有如下的子选项可以配置&lt;/p&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;CONFIG_MODULE_SIG&#34;&gt;
+&lt;p&gt;模块签名验证功能 配置为 &amp;quot;y&amp;quot; 后 才有后面的子选项可以配置&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;`CONFIG_MODULE_SIG_FORCE`&#34;&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;CONFIG_MODULE_SIG_FORCE&#34;&gt;
 &lt;p&gt;是否验证模块的签名&lt;br /&gt;
 配置为 &amp;quot;n&amp;quot; 时 对于未签名或者使用无效的 key 签名的模块 内核都允许加载&lt;br /&gt;
 但是 kernel 会被标记为被感染 (tainted) 并且使用商业许可的模块也会被标记为被感染&lt;br /&gt;
 若配置为‘y’ 则只有正确签名的模块才能被允许加载&lt;br /&gt;
 其他的模块将被拒绝加载 并且 kernel 会打出错误信息&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;`CONFIG_MODULE_SIG_ALL`&#34;&gt;
+&lt;div class=&#34;tab&#34; data-id=&#34;id1&#34; data-title=&#34;CONFIG_MODULE_SIG_ALL&#34;&gt;
 &lt;p&gt;若配置为 &amp;quot;n&amp;quot; 则在 build kernel 的过程中&lt;br /&gt;
 所有的模块都不会被签名 需要自己手动签名&lt;br /&gt;
 若被配置为 &amp;quot;y&amp;quot; 则在 build kernel 的 &amp;quot;modules_install&amp;quot; 阶段&lt;br /&gt;
@@ -306,8 +317,8 @@
 &lt;p&gt;研究中... 未完待续&lt;/p&gt;
 </content>
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
+        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="Kernel" scheme="https://blog.hongqing.online/tags/Kernel/" />
         <updated>2022-01-17T06:55:25.000Z</updated>
     </entry>
@@ -893,8 +904,8 @@
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule &lt;span class=&#34;token function&#34;&gt;add&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;url&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt; path/path&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# url 是指向的仓库地址 path/path 指向子模块目录&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 例如: git submodule add https://github.com/SsageParuders/hexo-theme-shoka themes/shoka&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 使用这个命令 取消子模块关联: git rm --cached themes/shoka&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 新出现的 .gitmodules 文件 是子模块的配置文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;克隆含有子模块的项目&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#克隆含有子模块的项目&#34;&gt;#&lt;/a&gt; 克隆含有子模块的项目&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 当你在克隆这样的项目时 默认会包含该子模块目录 但其中还没有任何文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 你必须运行两个命令:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule init &lt;span class=&#34;token comment&#34;&gt;# 初始化本地配置文件&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; submodule update &lt;span class=&#34;token comment&#34;&gt;# 从该项目中抓取所有数据并检出父项目中列出的合适的提交&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 有更简单一点的方式 如果给 git clone 命令传递 --recurse-submodules 选项&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 它就会自动初始化并更新仓库中的每一个子模块 包括可能存在的嵌套子模块&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
         <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-        <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
         <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
         <updated>2021-12-24T07:46:25.000Z</updated>
     </entry>
     <entry>
