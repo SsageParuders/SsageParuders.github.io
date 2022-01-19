@@ -47,8 +47,7 @@
 &lt;/div&gt;&lt;/details&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;也就是说 安卓内核中提供的诸多模块驱动&lt;br /&gt;
-对整个安卓系统有较为重要的影响&lt;br /&gt;
+&lt;p&gt;也就是说 安卓内核中提供的诸多模块驱动 对整个安卓系统有较为重要的影响&lt;br /&gt;
 那么说:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如何编译安卓内核 (Android Kernel)&lt;/li&gt;
@@ -88,6 +87,11 @@
 &lt;/div&gt;&lt;/details&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;下面我简单来说一下环境的配置步骤&lt;/p&gt;
+&lt;h2 id=&#34;请先阅读&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#请先阅读&#34;&gt;#&lt;/a&gt; 请先阅读&lt;/h2&gt;
+&lt;p&gt;安卓开发 必然离不开 Google 官方的开发文档&lt;br /&gt;
+以下是官方给出的一些文档资料&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5nb29nbGUuY24vc2V0dXAvaW5pdGlhbGl6aW5nP2hsPXpoX2Nu&#34;&gt;【搭建编译环境】&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5nb29nbGUuY24vc2V0dXAvcmVxdWlyZW1lbnRzP2hsPXpoX2Nu&#34;&gt;【要求】&lt;/span&gt;&lt;/p&gt;
 &lt;h2 id=&#34;下载系统依赖环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#下载系统依赖环境&#34;&gt;#&lt;/a&gt; 下载系统依赖环境&lt;/h2&gt;
 &lt;p&gt;建议一次只安装一行环境&lt;br /&gt;
 这样哪次安装报错了可以及时排查&lt;br /&gt;
@@ -116,22 +120,44 @@
 其中自然包含当前内核由什么编译器编译而成&lt;br /&gt;
 比如上面的输出信息 &lt;code&gt;clang version 10.0.6 for Android NDK&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt; &lt;br /&gt;
- 那么你应该使用&lt;/li&gt;
-&lt;li&gt;如果是 &lt;code&gt;clang version x.x.x for Android NDK&lt;/code&gt; &lt;br /&gt;
+&lt;li&gt;
+&lt;p&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt; &lt;br /&gt;
+ 那么你应该使用&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果是 &lt;code&gt;clang version x.x.x for Android NDK&lt;/code&gt; &lt;br /&gt;
  那么你应该使用的是由高通发布的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt; &lt;br /&gt;
- 最后 简单讲讲我查到的内核交叉编译链的相关资料&lt;/li&gt;
+ 最后 简单讲讲我查到的内核交叉编译链的相关资料&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;研究结果&lt;br /&gt;
+根据&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5nb29nbGUuY24vc2V0dXAvcmVxdWlyZW1lbnRzP2hsPXpoX2NuI3Rvb2xjaGFpbg==&#34;&gt;【资料】&lt;/span&gt;表明&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Android 8.0 及更高版本仅支持使用 Clang/LLVM 来编译 Android 平台&lt;br /&gt;
+对于原生开发工具包 (NDK) 和旧版内核 您也可以使用 AOSP 主分支中包含的 GCC 4.9 (在 prebuilts/ 下)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;据传 ndk 里面的交叉编译链也能编译部分很老的内核？我没试过 有朋友试过了可以留言一下&lt;br /&gt;
+言归正传 反正大概的意思就是说 Android 官方在某个版本后 (内核版本 4.14+ 需要 clang 编译) 弃用了 gcc&lt;br /&gt;
+ 改而使用 clang/llvm 来编译内核源码 因此 如果使用 gcc 去编译最新的 Android Kernel 难免会出现异常情况&lt;br /&gt;
+此时 应该换用 clang/llvm 进行编译 在这里推荐使用高通提供的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt; &lt;br /&gt;
+ 判断内核具体使用哪种编译体系 上文已经给出方法 &lt;code&gt;/proc/version&lt;/code&gt;  里有你想要的信息&lt;br /&gt;
+另外 不同的编译体系 需要自行编写 build 方式&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;相关链接:&lt;br /&gt;
+【推荐】Google gcc:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vcHJlYnVpbHRzL2djYy9saW51eC14ODYvYWFyY2g2NC9hYXJjaDY0LWxpbnV4LWFuZHJvaWQtNC45Lw==&#34;&gt;【传送门】&lt;/span&gt;&lt;br /&gt;
+老版本的内核经常使用这个&lt;br /&gt;
+ Google clang:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vcHJlYnVpbHRzL2NsYW5nL2hvc3QvbGludXgteDg2LysvbWFzdGVy&#34;&gt;【传送门】&lt;/span&gt;&lt;br /&gt;
+这个是谷歌源码树里面的 clang 据说是用来编译内核的 具体我没测试 毕竟我使用的是高通提供的 clang/llvm 有兴趣的朋友可以试试这个&lt;br /&gt;
+【推荐】Snapdragon LLVM Compiler for Android:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NvZnR3YXJlL3NuYXBkcmFnb24tbGx2bS1jb21waWxlci1hbmRyb2lkL3Rvb2xz&#34;&gt;【传送门】&lt;/span&gt;&lt;br /&gt;
+顺便一提 从高通开发者平台下载工具需要注册账号并登录 不然你点半天也不下载 别问我怎么知道&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;以下是第三方开发者整合的交叉编译工具链合集&lt;br /&gt;
+ tc-build:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL0NsYW5nQnVpbHRMaW51eC90Yy1idWlsZA==&#34;&gt;【传送门】&lt;/span&gt;&lt;br /&gt;
+jonascardoso-toolchain:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL0pvbmFzQ2FyZG9zby9Ub29sY2hhaW4=&#34;&gt;【传送门】&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;details&gt;&lt;summary&gt;相关资料&lt;/summary&gt;&lt;div&gt;
-&lt;pre&gt;&lt;code&gt;据传ndk里面的交叉编译链也能编译部分很老的内核?
-Google gcc:[【传送门】](https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/)
-
-Google clang:[【传送门】](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+/master)
-这个是谷歌源码树里面的clang 据说是能用来编译内核的 具体我没测试 毕竟我使用的是高通提供的clang/llvm 有兴趣的朋友可以试试这个
-Snapdragon LLVM Compiler for Android:[【传送门】](https://developer.qualcomm.com/software/snapdragon-llvm-compiler-android/tools)
-顺便一提 从高通开发者平台下载工具需要注册账号并登录 不然你点半天也不下载 别问我怎么知道的
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;/details&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;设置编译目标平台&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译目标平台&#34;&gt;#&lt;/a&gt; 设置编译目标平台&lt;/h2&gt;
 &lt;p&gt;本文讨论的是安卓内核的编译&lt;br /&gt;
 就目前而言 大多数的安卓都是 aarch64 构架&lt;br /&gt;
@@ -182,7 +208,7 @@ dtbo 是 &lt;code&gt;device tree binary overlay&lt;/code&gt;  的简称&lt;br /&
 &lt;p&gt;那么问题来了 如何判断自己的机型编译的内核是否需要包含 dtbo 呢&lt;br /&gt;
 我个人的做法是 在编译配置文件中 查找是否包含参数 &lt;code&gt;CONFIG_BUILD_ARM64_DT_OVERLAY&lt;/code&gt; &lt;br /&gt;
  如果包含该参数 则编译的内核需要使用 dtbo 将该参数修改为 &amp;quot;y&amp;quot; 此时 配置环境变量:&lt;/p&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;编译包含dtbo的内核 因此需要dtc&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;DTC_EXT&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;dtc&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;ins&gt;注:dtc must be from aosp source code (pie-release)&lt;/ins&gt;&lt;br /&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;编译包含dtbo的内核 因此需要dtc&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;DTC_EXT&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;dtc&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;ins&gt;注:dtc must be from aosp source code (pie-release) dtc 编译器要去源码树上找！&lt;/ins&gt;&lt;br /&gt;
 &lt;ins&gt; 另外 根据我个人对 dtbo 的理解 貌似我这种判断方法并不妥当&lt;/ins&gt;&lt;/p&gt;
 &lt;h2 id=&#34;安装ndk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装ndk&#34;&gt;#&lt;/a&gt; 安装 ndk&lt;/h2&gt;
 &lt;p&gt;既然是 Android 的 native 层开发&lt;br /&gt;
@@ -194,10 +220,12 @@ dtbo 是 &lt;code&gt;device tree binary overlay&lt;/code&gt;  的简称&lt;br /&
 一律使用临时环境变量进行配置
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;附带参考&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#附带参考&#34;&gt;#&lt;/a&gt; 附带参考&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5nb29nbGUuY24vZGV2aWNlcy90ZWNoL2RlYnVnL2thc2FuLWtjb3Y/aGw9emhfY24=&#34;&gt;【使用 KASAN+KCOV 构建 Pixel 内核】&lt;/span&gt;&lt;/p&gt;
 &lt;h1 id=&#34;编译内核源码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编译内核源码&#34;&gt;#&lt;/a&gt; 编译内核源码&lt;/h1&gt;
 &lt;h2 id=&#34;单独克隆内核源码的对应分支&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#单独克隆内核源码的对应分支&#34;&gt;#&lt;/a&gt; 单独克隆内核源码的对应分支&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;单独克隆内核源码的对应分支&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone --depth&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b sagit-p-oss sagit-p-oss&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;在源码目录创建输出内核编译输出目录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#在源码目录创建输出内核编译输出目录&#34;&gt;#&lt;/a&gt; 在源码目录创建输出内核编译输出目录&lt;/h2&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;设置编译环境&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译环境&#34;&gt;#&lt;/a&gt; 设置编译环境&lt;/h2&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;设置编译时环境变量&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译时环境变量&#34;&gt;#&lt;/a&gt; 设置编译时环境变量&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;建议环境变量使用临时配置&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64 &lt;span class=&#34;token comment&#34;&gt;# 设定交叉编译目标为 arm64&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CROSS_COMPILE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/toolchain/google_gcc-4.9/aarch64-linux-android-4.9/bin/aarch64-linux-android-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;根据配置文件-生成编译脚本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#根据配置文件-生成编译脚本&#34;&gt;#&lt;/a&gt; 根据配置文件 生成编译脚本&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数必加!&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out sagit_user_defconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;温馨提示一:&lt;/p&gt;
@@ -319,7 +347,7 @@ dtbo 是 &lt;code&gt;device tree binary overlay&lt;/code&gt;  的简称&lt;br /&
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;一些补充&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一些补充&#34;&gt;#&lt;/a&gt; 一些补充&lt;/h3&gt;
-&lt;p&gt;注意 Makefile 中要加上 &lt;code&gt;CFLAGS_MODULE=-fno-pic&lt;/code&gt;  选项&lt;br /&gt;
+&lt;p&gt;注意 编译 ko 模块的 Makefile 中要加上 &lt;code&gt;CFLAGS_MODULE=-fno-pic&lt;/code&gt;  选项&lt;br /&gt;
 不然编译好的模块 relocation 节会错误 如下&lt;/p&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;insmod: init_module &lt;span class=&#34;token string&#34;&gt;&#39;hello.ko&#39;&lt;/span&gt; failed &lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;Exec &lt;span class=&#34;token function&#34;&gt;format&lt;/span&gt; error&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;替换安卓内核大概分如下步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#替换安卓内核大概分如下步骤&#34;&gt;#&lt;/a&gt; 替换安卓内核大概分如下步骤&lt;/h3&gt;
 &lt;ol&gt;
@@ -350,7 +378,8 @@ dtbo 是 &lt;code&gt;device tree binary overlay&lt;/code&gt;  的简称&lt;br /&
 这一步&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;重新打包出 &lt;code&gt;boot.img&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;重新打包出 &lt;code&gt;boot.img&lt;/code&gt; &lt;br /&gt;
+ 利用工具替换好内核后 生成新的 &lt;code&gt;boot.img&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;fastboot 刷入 &lt;code&gt;boot.img&lt;/code&gt;&lt;/p&gt;
