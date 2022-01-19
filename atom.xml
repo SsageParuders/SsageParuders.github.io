@@ -103,7 +103,8 @@
 &lt;h2 id=&#34;设置交叉编译链工具&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置交叉编译链工具&#34;&gt;#&lt;/a&gt; 设置交叉编译链工具&lt;/h2&gt;
 &lt;p&gt;&lt;ins&gt;&lt;strong&gt;这一步至关重要&lt;/strong&gt;&lt;/ins&gt;&lt;br /&gt;
 不同的内核 由于各方面因素影响&lt;br /&gt;
-使用的编译器有可能完全不一样&lt;/p&gt;
+使用的编译器有可能完全不一样&lt;br /&gt;
+使用不匹配的编译器 轻则编译失败 重则无法开机&lt;/p&gt;
 &lt;details&gt;&lt;summary&gt;举个栗子&lt;/summary&gt;&lt;div&gt;
 &lt;pre&gt;&lt;code&gt;本次实验的是小米6
 小米6的内核使用的是 Google gcc 4.9
@@ -120,15 +121,13 @@
 其中自然包含当前内核由什么编译器编译而成&lt;br /&gt;
 比如上面的输出信息 &lt;code&gt;clang version 10.0.6 for Android NDK&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt; &lt;br /&gt;
- 那么你应该使用&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;如果是 &lt;code&gt;clang version x.x.x for Android NDK&lt;/code&gt; &lt;br /&gt;
- 那么你应该使用的是由高通发布的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt; &lt;br /&gt;
- 最后 简单讲讲我查到的内核交叉编译链的相关资料&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;如果是 &lt;code&gt;gcc x.x.x&lt;/code&gt; &lt;br /&gt;
+ 那么你应该下载谷歌源码树上的 gcc 进行编译 链接下文会给出&lt;/li&gt;
+&lt;li&gt;如果是 &lt;code&gt;clang version x.x.x for Android NDK&lt;/code&gt; &lt;br /&gt;
+ 那么你应该使用的是由高通发布的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;ins&gt;最后 简单讲讲我查到的内核交叉编译链的相关资料&lt;/ins&gt;&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;研究结果&lt;br /&gt;
 根据&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zb3VyY2UuYW5kcm9pZC5nb29nbGUuY24vc2V0dXAvcmVxdWlyZW1lbnRzP2hsPXpoX2NuI3Rvb2xjaGFpbg==&#34;&gt;【资料】&lt;/span&gt;表明&lt;/p&gt;
@@ -136,31 +135,43 @@
 &lt;p&gt;Android 8.0 及更高版本仅支持使用 Clang/LLVM 来编译 Android 平台&lt;br /&gt;
 对于原生开发工具包 (NDK) 和旧版内核 您也可以使用 AOSP 主分支中包含的 GCC 4.9 (在 prebuilts/ 下)&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;据传 ndk 里面的交叉编译链也能编译部分很老的内核？我没试过 有朋友试过了可以留言一下&lt;br /&gt;
-言归正传 反正大概的意思就是说 Android 官方在某个版本后 (内核版本 4.14+ 需要 clang 编译) 弃用了 gcc&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;据传 ndk 里面的交叉编译链也能编译部分很老的内核？我没试过 有朋友试过了可以留言一下&lt;/li&gt;
+&lt;li&gt;言归正传 反正大概的意思就是说 Android 官方在某个版本后 (内核版本 4.14+ 需要 clang 编译) 弃用了 gcc&lt;br /&gt;
  改而使用 clang/llvm 来编译内核源码 因此 如果使用 gcc 去编译最新的 Android Kernel 难免会出现异常情况&lt;br /&gt;
 此时 应该换用 clang/llvm 进行编译 在这里推荐使用高通提供的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt; &lt;br /&gt;
- 判断内核具体使用哪种编译体系 上文已经给出方法 &lt;code&gt;/proc/version&lt;/code&gt;  里有你想要的信息&lt;br /&gt;
-另外 不同的编译体系 需要自行编写 build 方式&lt;/p&gt;
+ 判断内核具体使用哪种编译体系 上文已经给出方法 &lt;code&gt;/proc/version&lt;/code&gt;  里有你想要的信息&lt;/li&gt;
+&lt;li&gt;另外 不同的编译体系 需要填写的编译参数也不一样&lt;br /&gt;
+这里我得要介绍一下编译参数的填写 先上一个编译脚本例子:&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-j&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;nproc --all&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt; \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;O=out \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ARCH=arm64 \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CLANG_TRIPLE=aarch64-linux-gnu- \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CROSS_COMPILE=&amp;lt;编译器路径&gt;/bin/aarch64-linux-gnu- \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CC=&amp;lt;编译器路径&gt;/bin/clang \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CROSS_COMPILE_ARM32=&amp;lt;编译器路径&gt;/bin/arm-linux-gnueabi- &#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$&amp;#123;args&amp;#125;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;config name&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$&amp;#123;args&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;接下来开始介绍编译器相关参数的使用
+&lt;ul&gt;
+&lt;li&gt;CLANG_TRIPLE 和 CC 只在使用 clang 时需要指定&lt;/li&gt;
+&lt;li&gt;CROSS_COMPILE_ARM32 只在编译 32 位内核 / 带 vdso 补丁的内核时需要指定&lt;/li&gt;
+&lt;li&gt;如果你在使用谷歌的 gcc 4.9 请指定 CROSS_COMPILE=&amp;lt;编译器路径&amp;gt;/bin/aarch64-linux-android- 32 位同理&lt;/li&gt;
+&lt;li&gt;正常情况下 CROSS_COMPILE 和 CROSS_COMPILE_ARM32 都应指向 gcc 所在位置&lt;br /&gt;
+即使你在使用 clang 也是如此 因为 clang 无法提供编译内核所需的 binutils&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt;接上面一条：正常情况下 clang 是无法独立完成内核编译的 需要 gcc 的辅助&lt;/ins&gt; 目前还需要 GCC 在一定程度上予以支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;相关链接:&lt;br /&gt;
-&lt;span class=&#34;label info&#34;&gt;Google gcc&lt;/span&gt;:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vcHJlYnVpbHRzL2djYy9saW51eC14ODYvYWFyY2g2NC9hYXJjaDY0LWxpbnV4LWFuZHJvaWQtNC45Lw==&#34;&gt;【传送门】&lt;/span&gt;&lt;/p&gt;
+&lt;span class=&#34;label info&#34;&gt;Google gcc:&lt;/span&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vcHJlYnVpbHRzL2djYy9saW51eC14ODYvYWFyY2g2NC9hYXJjaDY0LWxpbnV4LWFuZHJvaWQtNC45Lw==&#34;&gt;【传送门】&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;老版本的内核经常使用这个&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;span class=&#34;label info&#34;&gt;Google clang&lt;/span&gt;:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vcHJlYnVpbHRzL2NsYW5nL2hvc3QvbGludXgteDg2LysvbWFzdGVy&#34;&gt;【传送门】&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;label info&#34;&gt;Google clang:&lt;/span&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hbmRyb2lkLmdvb2dsZXNvdXJjZS5jb20vcGxhdGZvcm0vcHJlYnVpbHRzL2NsYW5nL2hvc3QvbGludXgteDg2LysvbWFzdGVy&#34;&gt;【传送门】&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;这个是谷歌源码树里面的 clang 据说是用来编译内核的 具体我没测试 毕竟我使用的是高通提供的 clang/llvm 有兴趣的朋友可以试试这个&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;span class=&#34;label info&#34;&gt;Snapdragon LLVM Compiler for Android&lt;/span&gt;:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NvZnR3YXJlL3NuYXBkcmFnb24tbGx2bS1jb21waWxlci1hbmRyb2lkL3Rvb2xz&#34;&gt;【传送门】&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;label info&#34;&gt;Snapdragon LLVM Compiler for Android:&lt;/span&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9kZXZlbG9wZXIucXVhbGNvbW0uY29tL3NvZnR3YXJlL3NuYXBkcmFnb24tbGx2bS1jb21waWxlci1hbmRyb2lkL3Rvb2xz&#34;&gt;【传送门】&lt;/span&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;顺便一提 从高通开发者平台下载工具需要注册账号并登录 不然你点半天也不下载 别问我怎么知道&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;以下是第三方开发者整合的交叉编译工具链合集&lt;br /&gt;
-&lt;span class=&#34;label info&#34;&gt; tc-build&lt;/span&gt;:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL0NsYW5nQnVpbHRMaW51eC90Yy1idWlsZA==&#34;&gt;【传送门】&lt;/span&gt;&lt;br /&gt;
-&lt;span class=&#34;label info&#34;&gt;jonascardoso-toolchain&lt;/span&gt;:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL0pvbmFzQ2FyZG9zby9Ub29sY2hhaW4=&#34;&gt;【传送门】&lt;/span&gt;&lt;/li&gt;
+&lt;span class=&#34;label info&#34;&gt; tc-build:&lt;/span&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL0NsYW5nQnVpbHRMaW51eC90Yy1idWlsZA==&#34;&gt;【传送门】&lt;/span&gt;&lt;br /&gt;
+&lt;span class=&#34;label info&#34;&gt;jonascardoso-toolchain:&lt;/span&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL0pvbmFzQ2FyZG9zby9Ub29sY2hhaW4=&#34;&gt;【传送门】&lt;/span&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -397,8 +408,8 @@
 &lt;p&gt;研究中... 未完待续&lt;/p&gt;
 </content>
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-        <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
         <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
         <category term="Kernel" scheme="https://blog.hongqing.online/tags/Kernel/" />
         <updated>2022-01-17T06:55:25.000Z</updated>
     </entry>
@@ -566,8 +577,8 @@
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090835834.png&#34; alt=&#34;&#34; title=&#34;常见阶比较&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="数据结构与算法" scheme="https://blog.hongqing.online/categories/structure-arith/" />
-        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
+        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <updated>2022-01-08T10:28:25.000Z</updated>
     </entry>
     <entry>
