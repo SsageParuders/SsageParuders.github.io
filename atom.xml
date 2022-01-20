@@ -138,18 +138,22 @@
 &lt;ul&gt;
 &lt;li&gt;据传 ndk 里面的交叉编译链也能编译部分很老的内核？我没试过 有朋友试过了可以留言一下&lt;/li&gt;
 &lt;li&gt;言归正传 反正大概的意思就是说 Android 官方在某个版本后 (内核版本 4.14+ 需要 clang 编译) 弃用了 gcc&lt;br /&gt;
- 改而使用 clang/llvm 来编译内核源码 因此 如果使用 gcc 去编译最新的 Android Kernel 难免会出现异常情况&lt;br /&gt;
+ 改而使用 clang/llvm 来编译内核源码&lt;br /&gt;
+因此 如果使用 gcc 去编译最新的 Android Kernel 难免会出现异常情况&lt;br /&gt;
 此时 应该换用 clang/llvm 进行编译 在这里推荐使用高通提供的 &lt;code&gt;Snapdragon LLVM Compiler for Android&lt;/code&gt; &lt;br /&gt;
  判断内核具体使用哪种编译体系 上文已经给出方法 &lt;code&gt;/proc/version&lt;/code&gt;  里有你想要的信息&lt;/li&gt;
 &lt;li&gt;另外 不同的编译体系 需要填写的编译参数也不一样&lt;br /&gt;
-这里我得要介绍一下编译参数的填写 先上一个编译脚本例子:&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-j&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;nproc --all&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt; \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;O=out \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ARCH=arm64 \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CLANG_TRIPLE=aarch64-linux-gnu- \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CROSS_COMPILE=&amp;lt;编译器路径&gt;/bin/aarch64-linux-gnu- \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CC=&amp;lt;编译器路径&gt;/bin/clang \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CROSS_COMPILE_ARM32=&amp;lt;编译器路径&gt;/bin/arm-linux-gnueabi- &#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$&amp;#123;args&amp;#125;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;config name&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$&amp;#123;args&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;接下来开始介绍编译器相关参数的使用
+这里我得要介绍一下编译参数的填写&lt;br /&gt;
+先上一个编译脚本例子 例子是死的 各位要视具体情况灵活变通:&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token shebang important&#34;&gt;#!/bin/bash&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token assign-left variable&#34;&gt;args&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;-j&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;nproc --all&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt; \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;O=out \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ARCH=arm64 \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CLANG_TRIPLE=aarch64-linux-gnu- \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CROSS_COMPILE=&amp;lt;gcc编译器路径&gt;/bin/aarch64-linux-gnu- \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CC=&amp;lt;clang编译器路径&gt;/bin/clang \&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;CROSS_COMPILE_ARM32=&amp;lt;gcc编译器路径&gt;/bin/arm-linux-gnueabi- &#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$&amp;#123;args&amp;#125;&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;lt;&lt;/span&gt;config name&lt;span class=&#34;token operator&#34;&gt;&gt;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$&amp;#123;args&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;接下来开始介绍编译器相关参数的使用
 &lt;ul&gt;
-&lt;li&gt;CLANG_TRIPLE 和 CC 只在使用 clang 时需要指定&lt;/li&gt;
-&lt;li&gt;CROSS_COMPILE_ARM32 只在编译 32 位内核 / 带 vdso 补丁的内核时需要指定&lt;/li&gt;
-&lt;li&gt;如果你在使用谷歌的 gcc 4.9 请指定 CROSS_COMPILE=&amp;lt;编译器路径&amp;gt;/bin/aarch64-linux-android- 32 位同理&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt;&lt;strong&gt;CLANG_TRIPLE 和 CC 只在使用 clang 时需要指定&lt;/strong&gt;&lt;/ins&gt;&lt;br /&gt;
+编译器有 &amp;quot;预处理 编译 汇编 链接&amp;quot; 四个过程 而这四个过程由不同模块组成&lt;br /&gt;
+&lt;ins&gt;&lt;strong&gt; CC 则是将编译环节指定成了 Clang&lt;/strong&gt;&lt;/ins&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CROSS_COMPILE_ARM32 只在编译 32 位内核 / 带 vdso 补丁的内核时需要指定&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;如果你在使用谷歌的 &lt;code&gt;gcc 4.9&lt;/code&gt;  请指定 CROSS_COMPILE=&amp;lt;编译器路径&amp;gt;/bin/aarch64-linux-android- 32 位同理&lt;/li&gt;
 &lt;li&gt;正常情况下 CROSS_COMPILE 和 CROSS_COMPILE_ARM32 都应指向 gcc 所在位置&lt;br /&gt;
 即使你在使用 clang 也是如此 因为 clang 无法提供编译内核所需的 binutils&lt;/li&gt;
-&lt;li&gt;&lt;ins&gt;接上面一条：正常情况下 clang 是无法独立完成内核编译的 需要 gcc 的辅助&lt;/ins&gt; 目前还需要 GCC 在一定程度上予以支持&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt;接上面一条：正常情况下 clang 是无法独立完成内核编译的 需要 gcc 的辅助 目前还需要 GCC 在一定程度上予以支持&lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -245,8 +249,29 @@
 &lt;h2 id=&#34;单独克隆内核源码的对应分支&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#单独克隆内核源码的对应分支&#34;&gt;#&lt;/a&gt; 单独克隆内核源码的对应分支&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;单独克隆内核源码的对应分支&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; clone --depth&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; https://github.com/MiCode/Xiaomi_Kernel_OpenSource.git -b sagit-p-oss sagit-p-oss&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;在源码目录创建输出内核编译输出目录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#在源码目录创建输出内核编译输出目录&#34;&gt;#&lt;/a&gt; 在源码目录创建输出内核编译输出目录&lt;/h2&gt;
 &lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;mkdir&lt;/span&gt; out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;设置编译时环境变量&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置编译时环境变量&#34;&gt;#&lt;/a&gt; 设置编译时环境变量&lt;/h2&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;建议环境变量使用临时配置&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64 &lt;span class=&#34;token comment&#34;&gt;# 设定交叉编译目标为 arm64&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CROSS_COMPILE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/toolchain/google_gcc-4.9/aarch64-linux-android-4.9/bin/aarch64-linux-android-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;根据配置文件-生成编译脚本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#根据配置文件-生成编译脚本&#34;&gt;#&lt;/a&gt; 根据配置文件 生成编译脚本&lt;/h2&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数必加!&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out sagit_user_defconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;div class=&#34;note danger&#34;&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;建议环境变量使用临时配置&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;ARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64 &lt;span class=&#34;token comment&#34;&gt;# 设定交叉编译目标为 arm64&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;SUBARCH&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;arm64&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;CROSS_COMPILE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/toolchain/google_gcc-4.9/aarch64-linux-android-4.9/bin/aarch64-linux-android- &lt;span class=&#34;token comment&#34;&gt;# 设置编译器&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;如果需要包含 dtbo 则需要加上如下变量 并且 &lt;code&gt;Set CONFIG_BUILD_ARM64_DT_OVERLAY=y&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;export&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;DTC_EXT&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;dtc&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;根据配置文件-生成编译脚本&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#根据配置文件-生成编译脚本&#34;&gt;#&lt;/a&gt; 根据配置文件 生成编译脚本&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果内核不需要 clang 参与编译 也就是 Google gcc 可以直接完成编译过程&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数必加!&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out sagit_user_defconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果需要指定 clang 为编译器 则需要添加 &lt;code&gt;CC&lt;/code&gt;  参数和 &lt;code&gt;CLANG_TRIPLE&lt;/code&gt;  参数&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;CC&lt;/code&gt;  参数指向 clang 编译器位置 意思是将编译环节交给 clang 处理&lt;br /&gt;
+ &lt;code&gt;CLANG_TRIPLE&lt;/code&gt;  就这样写吧 我看了很多资料都是这样写的&lt;br /&gt;
+具体这个参数的意义 我暂时也不知道 有了解的朋友烦请提点&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;note danger&#34;&gt;
+&lt;p&gt;注意：即使 &lt;code&gt;CC&lt;/code&gt;  将编译环节交给了 clang&lt;br /&gt;
+ 我们也要填写 &lt;code&gt;CROSS_COMPILE&lt;/code&gt;  变量 并且将变量指向 gcc&lt;br /&gt;
+ 原因上文已经解释 这里不再赘述&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;至于为什么&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL01pQ29kZS9YaWFvbWlfS2VybmVsX09wZW5Tb3VyY2Uvd2lraQ==&#34;&gt;小米官方 wiki&lt;/span&gt; 中 &lt;code&gt;CC&lt;/code&gt;  参数变成了 &lt;code&gt;REAL_CC&lt;/code&gt;  这我就不得而知了&lt;br /&gt;
+不过根据我亲测结果 &lt;code&gt;REAL_CC&lt;/code&gt;  换成 &lt;code&gt;CC&lt;/code&gt;  没有任何问题 所以我这里提供的命令范例就改成 &lt;code&gt;CC&lt;/code&gt;  了&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out &lt;span class=&#34;token assign-left variable&#34;&gt;CC&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/toolchain/snapdragon-llvm/toolchains/llvm-Snapdragon_LLVM_for_Android_8.0/prebuilt/linux-x86_64/bin/clang &lt;span class=&#34;token assign-left variable&#34;&gt;CLANG_TRIPLE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;aarch64-linux-gnu- cmi_user_defconfig&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;note danger&#34;&gt;
 &lt;p&gt;温馨提示一:&lt;/p&gt;
 &lt;/div&gt;
 &lt;blockquote&gt;
@@ -265,7 +290,15 @@
 于是 &lt;code&gt;chmod -R 777 (编译器路径)&lt;/code&gt;  直接把权限拉满&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;开始编译&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#开始编译&#34;&gt;#&lt;/a&gt; 开始编译&lt;/h2&gt;
-&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数指定编译好的内核产物输出目录&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;等待编译&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#等待编译&#34;&gt;#&lt;/a&gt; 等待编译&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果内核不需要 clang 参与编译 也就是 Google gcc 可以直接完成编译过程&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;span&gt;O参数指定编译好的内核产物输出目录&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果需要指定 clang 为编译器 则需要添加 &lt;code&gt;CC&lt;/code&gt;  参数和 &lt;code&gt;CLANG_TRIPLE&lt;/code&gt;  参数&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;make&lt;/span&gt; -j&lt;span class=&#34;token variable&#34;&gt;&lt;span class=&#34;token variable&#34;&gt;$(&lt;/span&gt;nproc&lt;span class=&#34;token variable&#34;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&#34;token assign-left variable&#34;&gt;O&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;out &lt;span class=&#34;token assign-left variable&#34;&gt;REAL_CC&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;/home/toolchain/snapdragon-llvm/toolchains/llvm-Snapdragon_LLVM_for_Android_8.0/prebuilt/linux-x86_64/bin/clang  &lt;span class=&#34;token assign-left variable&#34;&gt;CLANG_TRIPLE&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;aarch64-linux-gnu-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;等待编译&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#等待编译&#34;&gt;#&lt;/a&gt; 等待编译&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;等待编译的过程大概持续 20～30 分钟&lt;br /&gt;
@@ -408,8 +441,8 @@
 &lt;p&gt;研究中... 未完待续&lt;/p&gt;
 </content>
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
+        <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
         <category term="Kernel" scheme="https://blog.hongqing.online/tags/Kernel/" />
         <updated>2022-01-17T06:55:25.000Z</updated>
     </entry>
@@ -577,8 +610,8 @@
 &lt;img data-src=&#34;https://cdn.jsdelivr.net/gh/SsageParuders/RES/img/202201090835834.png&#34; alt=&#34;&#34; title=&#34;常见阶比较&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="数据结构与算法" scheme="https://blog.hongqing.online/categories/structure-arith/" />
-        <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
         <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+        <category term="数据结构与算法" scheme="https://blog.hongqing.online/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" />
         <updated>2022-01-08T10:28:25.000Z</updated>
     </entry>
     <entry>
@@ -1221,8 +1254,8 @@ Magisk 博主 Fork 后地址:【&lt;span class=&#34;exturl&#34; data-url=&#34;aH
         <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
         <category term="Android Security" scheme="https://blog.hongqing.online/categories/android/android-security/" />
         <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
-        <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
         <category term="逆向攻防" scheme="https://blog.hongqing.online/tags/%E9%80%86%E5%90%91%E6%94%BB%E9%98%B2/" />
+        <category term="转载" scheme="https://blog.hongqing.online/tags/%E8%BD%AC%E8%BD%BD/" />
         <updated>2021-12-23T18:42:25.000Z</updated>
     </entry>
 </feed>
