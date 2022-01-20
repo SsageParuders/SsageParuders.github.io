@@ -18,8 +18,8 @@
             <title>【Android Kernel】编译总结</title>
             <link>https://blog.hongqing.online/android/BuildAndroidKernel/</link>
             <category term="Android" scheme="https://blog.hongqing.online/categories/android/" />
-            <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
+            <category term="Android" scheme="https://blog.hongqing.online/tags/Android/" />
             <category term="Kernel" scheme="https://blog.hongqing.online/tags/Kernel/" />
             <pubDate>Mon, 17 Jan 2022 14:55:25 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h1&gt;
@@ -159,9 +159,10 @@
 &lt;ins&gt;&lt;strong&gt; CC 则是将编译环节指定成了 Clang&lt;/strong&gt;&lt;/ins&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;CROSS_COMPILE_ARM32 只在编译 32 位内核 / 带 vdso 补丁的内核时需要指定&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;如果你在使用谷歌的 &lt;code&gt;gcc 4.9&lt;/code&gt;  请指定 CROSS_COMPILE=&amp;lt;编译器路径&amp;gt;/bin/aarch64-linux-android- 32 位同理&lt;/li&gt;
-&lt;li&gt;正常情况下 CROSS_COMPILE 和 CROSS_COMPILE_ARM32 都应指向 gcc 所在位置&lt;br /&gt;
+&lt;li&gt;&lt;ins&gt;&lt;strong&gt;正常情况下 CROSS_COMPILE 和 CROSS_COMPILE_ARM32 都应指向 gcc 所在位置&lt;/strong&gt;&lt;/ins&gt;&lt;br /&gt;
 即使你在使用 clang 也是如此 因为 clang 无法提供编译内核所需的 binutils&lt;/li&gt;
-&lt;li&gt;&lt;ins&gt;接上面一条：正常情况下 clang 是无法独立完成内核编译的 需要 gcc 的辅助 目前还需要 GCC 在一定程度上予以支持&lt;/ins&gt;&lt;/li&gt;
+&lt;li&gt;&lt;ins&gt;接上面一条：正常情况下 clang 是无法独立完成内核编译的 需要 gcc 的辅助&lt;/ins&gt;&lt;br /&gt;
+&lt;ins&gt;目前还需要 GCC 在一定程度上予以支持&lt;/ins&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -969,8 +970,8 @@
             <title>Git学习笔记</title>
             <link>https://blog.hongqing.online/skills/GitStudy/</link>
             <category term="Skills" scheme="https://blog.hongqing.online/categories/skills/" />
-            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <category term="Git" scheme="https://blog.hongqing.online/tags/Git/" />
+            <category term="笔记向" scheme="https://blog.hongqing.online/tags/%E7%AC%94%E8%AE%B0%E5%90%91/" />
             <pubDate>Fri, 24 Dec 2021 15:46:25 +0800</pubDate>
             <description><![CDATA[ &lt;h1 id=&#34;git的工作区和版本库&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#git的工作区和版本库&#34;&gt;#&lt;/a&gt; Git 的工作区和版本库&lt;/h1&gt;
 &lt;blockquote&gt;
