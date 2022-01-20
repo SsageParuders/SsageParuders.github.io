@@ -86,6 +86,9 @@
  最终一次编译成功&lt;/p&gt;
 &lt;/div&gt;&lt;/details&gt;
 &lt;/blockquote&gt;
+&lt;div class=&#34;note danger&#34;&gt;
+&lt;p&gt;最好使用 &lt;code&gt;Ubuntu 18.04 LTS&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;下面我简单来说一下环境的配置步骤&lt;/p&gt;
 &lt;h2 id=&#34;请先阅读&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#请先阅读&#34;&gt;#&lt;/a&gt; 请先阅读&lt;/h2&gt;
 &lt;p&gt;安卓开发 必然离不开 Google 官方的开发文档&lt;br /&gt;
