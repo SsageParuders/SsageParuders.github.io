@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.hongqing.online/background/Elaina.png">
 <meta property="article:published_time" content="2022-11-29T06:55:00.000Z">
-<meta property="article:modified_time" content="2022-12-22T10:38:54.968Z">
+<meta property="article:modified_time" content="2022-12-22T10:45:33.510Z">
 <meta property="article:author" content="泓清">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Kernel">
@@ -394,10 +394,11 @@
 <li>这里不需要担心这个，我们只管安装插件即可，ndk里面自带的clangd就可以提供语言解析服务了，VsCode设置里面指定clangd路径即可。</li>
 <li>而且，貌似高版本clangd有什么大病？</li>
 </ul>
-<h1 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h1><ol>
-<li><p>完整编译内核</p>
+<h1 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h1><div class="note note-light">
+            <p>完整编译内核</p>
+          </div>
 <ul>
-<li>这里以ACK(Android Common Kernel)为例.<br>   因为ACK的编译最简单，不会出乱七八糟的错误，Google基本上完善好了一键编译体系。</li>
+<li>这里以ACK(Android Common Kernel)为例.<br>  因为ACK的编译最简单，不会出乱七八糟的错误，Google基本上完善好了一键编译体系。</li>
 <li>参考<a target="_blank" rel="noopener" href="https://source.android.google.cn/docs/setup/build/building-kernels">Google官方文档</a><blockquote>
 <p>这里默认读者会换源或者其他手法保持网络通畅</p>
 </blockquote>
@@ -411,7 +412,7 @@
 </ol>
 </li>
 </ul>
-</li>
+<ol start="2">
 <li><p>生成编译描述文件</p>
 <ul>
 <li>仔细观察我们编译的out目录，会发现有很多后缀为cmd的文件，这些其实就是编译过程中的临时文件，包含了编译命令等。</li>
